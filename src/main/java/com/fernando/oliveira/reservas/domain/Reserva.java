@@ -9,6 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
@@ -47,16 +51,17 @@ public class Reserva implements Serializable {
 	@Column(name="SIT_RESERVA")
 	private SituacaoReserva situacaoReserva;
 	
-	
-	private Viajante viajante;
-	
 	@Column(name="SIT_PAGAMENTO")
 	private SituacaoPagamento situacaoPagamento;
 	
-
+	@ManyToOne
+	@JoinColumn(name="ID_VIAJANTE")
+	private Viajante viajante;
+	
+	@OneToMany(mappedBy="reserva")
 	private List<Pagamento> pagamentos;
 	
-	
+	@OneToOne(mappedBy="reserva")
 	private Contrato contrato;
 	
 	public Integer getId() {

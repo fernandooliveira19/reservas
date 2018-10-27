@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.TipoPagamento;
 
 @Entity
@@ -27,7 +28,7 @@ public class Pagamento implements Serializable {
 	@Column(name="TIP_PAGAMENTO")
 	private TipoPagamento tipoPagamento;
 	
-	
+	@Column(name="ID_RESERVA")
 	private Reserva reserva;
 	
 	
@@ -49,6 +50,12 @@ public class Pagamento implements Serializable {
 	}
 	public void setReserva(Reserva reserva) {
 		this.reserva = reserva;
+	}
+	public TipoPagamento getTipoPagamento() {
+		return tipoPagamento;
+	}
+	public void setTipoPagamento(TipoPagamento tipoPagamento) {
+		this.tipoPagamento = tipoPagamento;
 	}
 
 }

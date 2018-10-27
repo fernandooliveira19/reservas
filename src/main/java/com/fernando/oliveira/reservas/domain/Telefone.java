@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -30,9 +32,17 @@ public class Telefone implements Serializable {
 	@Size(min=8, max=9, message="O campo nome deve ter entre 8 e 9 dígitos")
 	private String numero;
 	
-	@Column(name="TIPO_TELEFONE", nullable=false)
+	@Column(name="TIP_TELEFONE", nullable=false)
 	@NotEmpty(message="Preenchimento obrigatório")
 	private TipoTelefone tipoTelefone;
+	
+	/**
+	 * Relationships
+	 */
+	
+	@ManyToOne
+	@JoinColumn(name="ID_VIAJANTE")
+	private Viajante viajante;
 
 	public Integer getId() {
 		return id;
@@ -58,5 +68,13 @@ public class Telefone implements Serializable {
 	public void setTipoTelefone(TipoTelefone tipoTelefone) {
 		this.tipoTelefone = tipoTelefone;
 	}
+	public Viajante getViajante() {
+		return viajante;
+	}
+	public void setViajante(Viajante viajante) {
+		this.viajante = viajante;
+	}
+	
+	
 
 }

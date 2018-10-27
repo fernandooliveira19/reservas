@@ -17,6 +17,7 @@ public class Contrato implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(name="ID_RESERVA")
 	private Reserva reserva;
 	
 	@Column(name="DESC_ENTRADA")
