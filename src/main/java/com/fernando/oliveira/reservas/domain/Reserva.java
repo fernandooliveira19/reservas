@@ -4,27 +4,61 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 
+@Entity
 public class Reserva implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name="CODIGO")
 	private String codigo;
+	
+	@Column(name="DATA_ENTRADA", nullable=false)
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Date dataEntrada;
+	
+	@Column(name="DATA_SAIDA", nullable=false)
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Date dataSaida;
+	
+	@Column(name="VALOR_RESERVA", nullable=false)
+	@NotEmpty(message="Preenchimento obrigatório")
 	private Double valorTotal;
+	
+	@Column(name="VALOR_PAGO")
 	private Double valorPago;
+	
+	@Column(name="DATA_PENDENTE")
 	private Double valorPendente;
+	
+	@Column(name="SIT_RESERVA")
 	private SituacaoReserva situacaoReserva;
+	
+	
 	private Viajante viajante;
+	
+	@Column(name="SIT_PAGAMENTO")
 	private SituacaoPagamento situacaoPagamento;
+	
+
 	private List<Pagamento> pagamentos;
+	
+	
 	private Contrato contrato;
+	
 	public Integer getId() {
 		return id;
 	}

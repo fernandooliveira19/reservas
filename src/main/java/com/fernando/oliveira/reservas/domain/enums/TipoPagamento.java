@@ -1,6 +1,6 @@
 package com.fernando.oliveira.reservas.domain.enums;
 
-public enum FormaPagamento {
+public enum TipoPagamento {
 	
 	TRANSFERENCIA(1,"Transferencia"),
 	DEPOSITO(2,"Depósito"),
@@ -10,7 +10,7 @@ public enum FormaPagamento {
 	private Integer codigo;
 	private String descricao;
 	
-	FormaPagamento(Integer codigo, String descricao) {
+	TipoPagamento(Integer codigo, String descricao) {
 	
 		this.codigo = codigo;
 		this.descricao = descricao;
@@ -24,13 +24,13 @@ public enum FormaPagamento {
 		return descricao;
 	}
 	
-    public static FormaPagamento toEnum(Integer codigo) {
+    public static TipoPagamento toEnum(Integer codigo) {
 		
 		if(codigo == null){
 			return null;
 		}
 		
-		for(FormaPagamento tipo: FormaPagamento.values()) {
+		for(TipoPagamento tipo: TipoPagamento.values()) {
 			if(tipo.getCodigo().equals(codigo)) {
 				return tipo;
 			}
