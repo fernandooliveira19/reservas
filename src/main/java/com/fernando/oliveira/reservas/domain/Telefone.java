@@ -32,8 +32,7 @@ public class Telefone implements Serializable {
 	@Size(min=8, max=9, message="O campo nome deve ter entre 8 e 9 dígitos")
 	private String numero;
 	
-	@Column(name="TIP_TELEFONE", nullable=false)
-	@NotEmpty(message="Preenchimento obrigatório")
+	@Column(name="TIP_TELEFONE")
 	private TipoTelefone tipoTelefone;
 	
 	/**
@@ -44,6 +43,21 @@ public class Telefone implements Serializable {
 	@JoinColumn(name="ID_VIAJANTE")
 	private Viajante viajante;
 
+	public Telefone() {
+		
+	}
+	
+	public Telefone(Integer id,
+			@NotEmpty(message = "Preenchimento obrigatório") @Size(min = 2, max = 2, message = "O campo ddd deve ter 2 digitos") String ddd,
+			@NotEmpty(message = "Preenchimento obrigatório") @Size(min = 8, max = 9, message = "O campo nome deve ter entre 8 e 9 dígitos") String numero,
+			TipoTelefone tipoTelefone, Viajante viajante) {
+		super();
+		this.id = id;
+		this.ddd = ddd;
+		this.numero = numero;
+		this.tipoTelefone = tipoTelefone;
+		this.viajante = viajante;
+	}
 	public Integer getId() {
 		return id;
 	}

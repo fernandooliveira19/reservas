@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,16 +31,13 @@ public class Reserva implements Serializable {
 	@Column(name="CODIGO")
 	private String codigo;
 	
-	@Column(name="DATA_ENTRADA", nullable=false)
-	@NotEmpty(message="Preenchimento obrigatório")
+	@Column(name="DATA_ENTRADA")
 	private Date dataEntrada;
 	
-	@Column(name="DATA_SAIDA", nullable=false)
-	@NotEmpty(message="Preenchimento obrigatório")
+	@Column(name="DATA_SAIDA")
 	private Date dataSaida;
 	
-	@Column(name="VALOR_RESERVA", nullable=false)
-	@NotEmpty(message="Preenchimento obrigatório")
+	@Column(name="VALOR_RESERVA")
 	private Double valorTotal;
 	
 	@Column(name="VALOR_PAGO")
@@ -59,11 +57,39 @@ public class Reserva implements Serializable {
 	private Viajante viajante;
 	
 	@OneToMany(mappedBy="reserva")
-	private List<Pagamento> pagamentos;
+	private List<Lancamento> lancamentos;
 	
-	@OneToOne(mappedBy="reserva")
+	@OneToOne(mappedBy="reserva", cascade=CascadeType.ALL)
 	private Contrato contrato;
 	
+	public Reserva() {
+		
+	}
+	
+	public Reserva(Integer id,
+			String codigo,
+			Date dataEntrada,
+			Date dataSaida,
+			Double valorTotal,
+			Double valorPago,
+			Double valorPendente,
+			SituacaoReserva situacaoReserva,
+			SituacaoPagamento situacaoPagamento,
+			Viajante viajante,
+			Contrato contrato) {
+		super();
+		this.id = id;
+		this.codigo = codigo;
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+		this.valorTotal = valorTotal;
+		this.valorPago = valorPago;
+		this.valorPendente = valorPendente;
+		this.situacaoReserva = situacaoReserva;
+		this.situacaoPagamento = situacaoPagamento;
+		this.viajante = viajante;
+		this.contrato = contrato;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -118,12 +144,7 @@ public class Reserva implements Serializable {
 	public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
 		this.situacaoPagamento = situacaoPagamento;
 	}
-	public List<Pagamento> getPagamentos() {
-		return pagamentos;
-	}
-	public void setPagamentos(List<Pagamento> pagamentos) {
-		this.pagamentos = pagamentos;
-	}
+	
 	public Contrato getContrato() {
 		return contrato;
 	}
@@ -135,6 +156,12 @@ public class Reserva implements Serializable {
 	}
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
+	}
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 	
 

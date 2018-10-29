@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Contrato implements Serializable {
@@ -17,7 +22,10 @@ public class Contrato implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="ID_RESERVA")
+	
+	@OneToOne
+	@JoinColumn(name="ID_RESERVA")
+	@JsonIgnore
 	private Reserva reserva;
 	
 	@Column(name="DESC_ENTRADA")
@@ -25,6 +33,11 @@ public class Contrato implements Serializable {
 	
 	@Column(name="DESC_VALOR_TOTAL")
 	private String descricaoValorTotal;
+	
+	public Contrato() {
+		
+	}
+	
 	
 	public Integer getId() {
 		return id;

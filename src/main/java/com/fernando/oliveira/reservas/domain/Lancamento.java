@@ -13,7 +13,7 @@ import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.TipoPagamento;
 
 @Entity
-public class Pagamento implements Serializable {
+public class Lancamento implements Serializable {
 	
 
 	private static final long serialVersionUID = 1L;
@@ -31,6 +31,9 @@ public class Pagamento implements Serializable {
 	@Column(name="ID_RESERVA")
 	private Reserva reserva;
 	
+	public Lancamento() {
+		
+	}
 	
 	public Integer getId() {
 		return id;

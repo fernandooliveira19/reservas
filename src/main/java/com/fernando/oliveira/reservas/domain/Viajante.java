@@ -1,6 +1,7 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,9 @@ public class Viajante implements Serializable {
 	@Email
 	private String email;
 	
+	@Column(name="DATA_INCLUSAO", nullable=false)
+	private Date dataInclusao;
+	
 	
 	/**
 	 * Relationships
@@ -41,7 +45,20 @@ public class Viajante implements Serializable {
 	@OneToMany(mappedBy="viajante")
 	private List<Reserva> reservas;
 	
+	public Viajante() {
+		
+	}
 	
+	
+	public Viajante(Integer id,
+			@NotEmpty(message = "Preenchimento obrigatório") @Size(min = 5, max = 100, message = "O campo nome deve ter entre 5 e 100 caracteres") String nome,
+			@NotEmpty(message = "Preenchimento obrigatório") @Email String email, Date dataInclusao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.dataInclusao = dataInclusao;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -71,6 +88,12 @@ public class Viajante implements Serializable {
 	}
 	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
+	}
+	public Date getDataInclusao() {
+		return dataInclusao;
+	}
+	public void setDataInclusao(Date dataInclusao) {
+		this.dataInclusao = dataInclusao;
 	}
 	
 
