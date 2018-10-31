@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
-import com.fernando.oliveira.reservas.domain.enums.TipoPagamento;
 
 @Entity
 public class Lancamento implements Serializable {
@@ -22,43 +24,84 @@ public class Lancamento implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="DATA_PAGAMENTO")
-	private Date dataPagamento;
+	@Column(name="DAT_LANCAMENTO")
+	private Date dataLancamento;
 	
-	@Column(name="TIP_PAGAMENTO")
-	private TipoPagamento tipoPagamento;
+	@Column(name="VLR_LANCAMENTO")
+	private Double valorLancamento;
 	
-	@Column(name="ID_RESERVA")
-	private Reserva reserva;
+	@Column(name="FRM_PAGAMENTO")
+	private Integer formaPagamento;
+	
+	@Column(name="SIT_LANCAMENTO")
+	private Integer situacaoPagamento;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_VLR_RESERVA")
+	private ValorReserva valorReserva;
 	
 	public Lancamento() {
 		
 	}
-	
+
+	public Lancamento(Integer id, Date dataLancamento, Double valorLancamento, FormaPagamento formaPagamento,
+			SituacaoPagamento situacaoPagamento, ValorReserva valorReserva) {
+		
+		this.id = id;
+		this.dataLancamento = dataLancamento;
+		this.valorLancamento = valorLancamento;
+		this.formaPagamento = formaPagamento.getCodigo();
+		this.situacaoPagamento = situacaoPagamento.getCodigo();
+		this.valorReserva = valorReserva;
+	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getDataPagamento() {
-		return dataPagamento;
-	}
-	public void setDataPagamento(Date dataPagamento) {
-		this.dataPagamento = dataPagamento;
-	}
-	
-	public Reserva getReserva() {
-		return reserva;
-	}
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
-	}
-	public TipoPagamento getTipoPagamento() {
-		return tipoPagamento;
-	}
-	public void setTipoPagamento(TipoPagamento tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
+
+	public Date getDataLancamento() {
+		return dataLancamento;
 	}
 
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+	public Double getValorLancamento() {
+		return valorLancamento;
+	}
+
+	public void setValorLancamento(Double valorLancamento) {
+		this.valorLancamento = valorLancamento;
+	}
+
+	public FormaPagamento getFormaPagamento() {
+		return FormaPagamento.toEnum(formaPagamento);
+	}
+
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
+		this.formaPagamento = formaPagamento.getCodigo();
+	}
+
+	public SituacaoPagamento getSituacaoPagamento() {
+		return SituacaoPagamento.toEnum(situacaoPagamento);
+	}
+
+	public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
+		this.situacaoPagamento = situacaoPagamento.getCodigo();
+	}
+
+	public ValorReserva getValorReserva() {
+		return valorReserva;
+	}
+
+	public void setValorReserva(ValorReserva valorReserva) {
+		this.valorReserva = valorReserva;
+	}
+	
+	
 }

@@ -21,148 +21,115 @@ import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 
 @Entity
 public class Reserva implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="CODIGO")
+
+	@Column(name = "CODIGO")
 	private String codigo;
-	
-	@Column(name="DATA_ENTRADA")
+
+	@Column(name = "DATA_ENTRADA")
 	private Date dataEntrada;
-	
-	@Column(name="DATA_SAIDA")
+
+	@Column(name = "DATA_SAIDA")
 	private Date dataSaida;
-	
-	@Column(name="VALOR_RESERVA")
-	private Double valorTotal;
-	
-	@Column(name="VALOR_PAGO")
-	private Double valorPago;
-	
-	@Column(name="DATA_PENDENTE")
-	private Double valorPendente;
-	
-	@Column(name="SIT_RESERVA")
-	private SituacaoReserva situacaoReserva;
-	
-	@Column(name="SIT_PAGAMENTO")
-	private SituacaoPagamento situacaoPagamento;
-	
+
+	@Column(name = "SIT_RESERVA")
+	private Integer situacaoReserva;
+
 	@ManyToOne
-	@JoinColumn(name="ID_VIAJANTE")
+	@JoinColumn(name = "ID_VIAJANTE")
 	private Viajante viajante;
-	
-	@OneToMany(mappedBy="reserva")
-	private List<Lancamento> lancamentos;
-	
-	@OneToOne(mappedBy="reserva", cascade=CascadeType.ALL)
+
+	@OneToOne(mappedBy = "reserva")
+	private ValorReserva valorReserva;
+
+	@OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL)
 	private Contrato contrato;
-	
+
 	public Reserva() {
-		
+
 	}
-	
-	public Reserva(Integer id,
-			String codigo,
-			Date dataEntrada,
-			Date dataSaida,
-			Double valorTotal,
-			Double valorPago,
-			Double valorPendente,
-			SituacaoReserva situacaoReserva,
-			SituacaoPagamento situacaoPagamento,
-			Viajante viajante,
-			Contrato contrato) {
-		super();
+
+	public Reserva(Integer id, String codigo, Date dataEntrada, Date dataSaida, SituacaoReserva situacaoReserva,
+			Viajante viajante, ValorReserva valorReserva, Contrato contrato) {
+		
 		this.id = id;
 		this.codigo = codigo;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
-		this.valorTotal = valorTotal;
-		this.valorPago = valorPago;
-		this.valorPendente = valorPendente;
-		this.situacaoReserva = situacaoReserva;
-		this.situacaoPagamento = situacaoPagamento;
+		this.situacaoReserva = situacaoReserva.getCodigo();
 		this.viajante = viajante;
+		this.valorReserva = valorReserva;
 		this.contrato = contrato;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getDataEntrada() {
-		return dataEntrada;
-	}
-	public void setDataEntrada(Date dataEntrada) {
-		this.dataEntrada = dataEntrada;
-	}
-	public Date getDataSaida() {
-		return dataSaida;
-	}
-	public void setDataSaida(Date dataSaida) {
-		this.dataSaida = dataSaida;
-	}
-	public Double getValorTotal() {
-		return valorTotal;
-	}
-	public void setValorTotal(Double valorTotal) {
-		this.valorTotal = valorTotal;
-	}
-	public Double getValorPago() {
-		return valorPago;
-	}
-	public void setValorPago(Double valorPago) {
-		this.valorPago = valorPago;
-	}
-	public Double getValorPendente() {
-		return valorPendente;
-	}
-	public void setValorPendente(Double valorPendente) {
-		this.valorPendente = valorPendente;
-	}
-	public SituacaoReserva getSituacaoReserva() {
-		return situacaoReserva;
-	}
-	public void setSituacaoReserva(SituacaoReserva situacaoReserva) {
-		this.situacaoReserva = situacaoReserva;
-	}
-	public Viajante getViajante() {
-		return viajante;
-	}
-	public void setViajante(Viajante viajante) {
-		this.viajante = viajante;
-	}
-	public SituacaoPagamento getSituacaoPagamento() {
-		return situacaoPagamento;
-	}
-	public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
-		this.situacaoPagamento = situacaoPagamento;
-	}
-	
-	public Contrato getContrato() {
-		return contrato;
-	}
-	public void setContrato(Contrato contrato) {
-		this.contrato = contrato;
-	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public List<Lancamento> getLancamentos() {
-		return lancamentos;
-	}
-	public void setLancamentos(List<Lancamento> lancamentos) {
-		this.lancamentos = lancamentos;
-	}
-	
 
+	public Date getDataEntrada() {
+		return dataEntrada;
+	}
+
+	public void setDataEntrada(Date dataEntrada) {
+		this.dataEntrada = dataEntrada;
+	}
+
+	public Date getDataSaida() {
+		return dataSaida;
+	}
+
+	public void setDataSaida(Date dataSaida) {
+		this.dataSaida = dataSaida;
+	}
+
+	public SituacaoReserva getSituacaoReserva() {
+		return SituacaoReserva.toEnum(situacaoReserva);
+	}
+
+	public void setSituacaoReserva(SituacaoReserva situacaoReserva) {
+		this.situacaoReserva = situacaoReserva.getCodigo();
+	}
+
+	public Viajante getViajante() {
+		return viajante;
+	}
+
+	public void setViajante(Viajante viajante) {
+		this.viajante = viajante;
+	}
+
+	public ValorReserva getValorReserva() {
+		return valorReserva;
+	}
+
+	public void setValorReserva(ValorReserva valorReserva) {
+		this.valorReserva = valorReserva;
+	}
+
+	public Contrato getContrato() {
+		return contrato;
+	}
+
+	public void setContrato(Contrato contrato) {
+		this.contrato = contrato;
+	}
+
+	
 }

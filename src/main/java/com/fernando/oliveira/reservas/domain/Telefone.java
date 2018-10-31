@@ -33,7 +33,7 @@ public class Telefone implements Serializable {
 	private String numero;
 	
 	@Column(name="TIP_TELEFONE")
-	private TipoTelefone tipoTelefone;
+	private Integer tipoTelefone;
 	
 	/**
 	 * Relationships
@@ -55,7 +55,7 @@ public class Telefone implements Serializable {
 		this.id = id;
 		this.ddd = ddd;
 		this.numero = numero;
-		this.tipoTelefone = tipoTelefone;
+		this.tipoTelefone = tipoTelefone.getCodigo();
 		this.viajante = viajante;
 	}
 	public Integer getId() {
@@ -77,10 +77,10 @@ public class Telefone implements Serializable {
 		this.numero = numero;
 	}
 	public TipoTelefone getTipoTelefone() {
-		return tipoTelefone;
+		return TipoTelefone.toEnum(tipoTelefone);
 	}
 	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-		this.tipoTelefone = tipoTelefone;
+		this.tipoTelefone = tipoTelefone.getCodigo();
 	}
 	public Viajante getViajante() {
 		return viajante;
