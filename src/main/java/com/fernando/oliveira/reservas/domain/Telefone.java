@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.enums.TipoTelefone;
 
 @Entity
@@ -39,6 +40,7 @@ public class Telefone implements Serializable {
 	 * Relationships
 	 */
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ID_VIAJANTE")
 	private Viajante viajante;

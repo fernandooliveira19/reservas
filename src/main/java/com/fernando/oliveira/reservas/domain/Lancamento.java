@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 
@@ -25,6 +27,7 @@ public class Lancamento implements Serializable {
 	private Integer id;
 	
 	@Column(name="DAT_LANCAMENTO")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataLancamento;
 	
 	@Column(name="VLR_LANCAMENTO")
@@ -37,8 +40,10 @@ public class Lancamento implements Serializable {
 	private Integer situacaoPagamento;
 	
 	@Column(name="DAT_PAGAMENTO")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataPagamento;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="ID_RESERVA")
 	private Reserva reserva;

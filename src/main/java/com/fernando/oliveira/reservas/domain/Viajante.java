@@ -14,6 +14,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Viajante implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +35,7 @@ public class Viajante implements Serializable {
 	private String email;
 	
 	@Column(name="DATA_INCLUSAO", nullable=false)
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dataInclusao;
 	
 	

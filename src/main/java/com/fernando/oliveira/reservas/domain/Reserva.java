@@ -14,9 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotEmpty;
 
-import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 
 @Entity
@@ -32,9 +32,11 @@ public class Reserva implements Serializable {
 	private String codigo;
 
 	@Column(name = "DATA_ENTRADA")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataEntrada;
 
 	@Column(name = "DATA_SAIDA")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataSaida;
 
 	@Column(name = "SIT_RESERVA")
@@ -42,7 +44,8 @@ public class Reserva implements Serializable {
 	
 	@Column(name = "VLR_TOTAL")
 	private Double valorTotal;
-
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "ID_VIAJANTE")
 	private Viajante viajante;
