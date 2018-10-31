@@ -39,13 +39,16 @@ public class Reserva implements Serializable {
 
 	@Column(name = "SIT_RESERVA")
 	private Integer situacaoReserva;
+	
+	@Column(name = "VLR_TOTAL")
+	private Double valorTotal;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_VIAJANTE")
 	private Viajante viajante;
 
-	@OneToOne(mappedBy = "reserva")
-	private ValorReserva valorReserva;
+	@OneToMany(mappedBy = "reserva")
+	private List<Lancamento> lancamentos;
 
 	@OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL)
 	private Contrato contrato;
@@ -55,7 +58,7 @@ public class Reserva implements Serializable {
 	}
 
 	public Reserva(Integer id, String codigo, Date dataEntrada, Date dataSaida, SituacaoReserva situacaoReserva,
-			Viajante viajante, ValorReserva valorReserva, Contrato contrato) {
+			Viajante viajante, Double valorTotal, Contrato contrato) {
 		
 		this.id = id;
 		this.codigo = codigo;
@@ -63,7 +66,7 @@ public class Reserva implements Serializable {
 		this.dataSaida = dataSaida;
 		this.situacaoReserva = situacaoReserva.getCodigo();
 		this.viajante = viajante;
-		this.valorReserva = valorReserva;
+		this.valorTotal = valorTotal;
 		this.contrato = contrato;
 	}
 
@@ -115,20 +118,29 @@ public class Reserva implements Serializable {
 		this.viajante = viajante;
 	}
 
-	public ValorReserva getValorReserva() {
-		return valorReserva;
-	}
-
-	public void setValorReserva(ValorReserva valorReserva) {
-		this.valorReserva = valorReserva;
-	}
-
+	
 	public Contrato getContrato() {
 		return contrato;
 	}
 
 	public void setContrato(Contrato contrato) {
 		this.contrato = contrato;
+	}
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public List<Lancamento> getLancamentos() {
+		return lancamentos;
+	}
+
+	public void setLancamentos(List<Lancamento> lancamentos) {
+		this.lancamentos = lancamentos;
 	}
 
 	

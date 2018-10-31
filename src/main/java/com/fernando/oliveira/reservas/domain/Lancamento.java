@@ -36,23 +36,27 @@ public class Lancamento implements Serializable {
 	@Column(name="SIT_LANCAMENTO")
 	private Integer situacaoPagamento;
 	
+	@Column(name="DAT_PAGAMENTO")
+	private Date dataPagamento;
+	
 	@ManyToOne
-	@JoinColumn(name="ID_VLR_RESERVA")
-	private ValorReserva valorReserva;
+	@JoinColumn(name="ID_RESERVA")
+	private Reserva reserva;
 	
 	public Lancamento() {
 		
 	}
 
 	public Lancamento(Integer id, Date dataLancamento, Double valorLancamento, FormaPagamento formaPagamento,
-			SituacaoPagamento situacaoPagamento, ValorReserva valorReserva) {
+			SituacaoPagamento situacaoPagamento, Reserva reserva,Date dataPagamento) {
 		
 		this.id = id;
 		this.dataLancamento = dataLancamento;
 		this.valorLancamento = valorLancamento;
 		this.formaPagamento = formaPagamento.getCodigo();
 		this.situacaoPagamento = situacaoPagamento.getCodigo();
-		this.valorReserva = valorReserva;
+		this.reserva = reserva;
+		this.dataPagamento = dataPagamento;
 	}
 
 	public Integer getId() {
@@ -95,13 +99,23 @@ public class Lancamento implements Serializable {
 		this.situacaoPagamento = situacaoPagamento.getCodigo();
 	}
 
-	public ValorReserva getValorReserva() {
-		return valorReserva;
+	public Date getDataPagamento() {
+		return dataPagamento;
 	}
 
-	public void setValorReserva(ValorReserva valorReserva) {
-		this.valorReserva = valorReserva;
+	public void setDataPagamento(Date dataPagamento) {
+		this.dataPagamento = dataPagamento;
 	}
+
+	public Reserva getReserva() {
+		return reserva;
+	}
+
+	public void setReserva(Reserva reserva) {
+		this.reserva = reserva;
+	}
+
+	
 	
 	
 }
