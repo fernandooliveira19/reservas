@@ -25,6 +25,10 @@ public class ViajanteDTO implements Serializable {
 	@Email
 	private String email;
 	
+	public ViajanteDTO() {
+		
+	}
+	
 	public ViajanteDTO(Viajante obj) {
 		id = obj.getId();
 		nome = obj.getNome();

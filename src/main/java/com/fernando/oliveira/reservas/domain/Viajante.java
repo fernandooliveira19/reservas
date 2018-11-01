@@ -15,6 +15,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Viajante implements Serializable {
@@ -44,6 +45,7 @@ public class Viajante implements Serializable {
 	 */
 	@OneToMany(mappedBy="viajante")
 	private List<Telefone> telefones;
+	
 	
 	@OneToMany(mappedBy="viajante")
 	private List<Reserva> reservas;
