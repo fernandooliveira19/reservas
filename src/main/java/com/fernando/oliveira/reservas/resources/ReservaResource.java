@@ -27,8 +27,8 @@ public class ReservaResource {
 	private ReservaService service;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ReservaDTO dto){
-		Reserva obj = service.fromDTO(dto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody Reserva obj){
+		
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 
 @Entity
@@ -45,7 +45,7 @@ public class Reserva implements Serializable {
 	@Column(name = "VLR_TOTAL")
 	private Double valorTotal;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "ID_VIAJANTE")
 	private Viajante viajante;

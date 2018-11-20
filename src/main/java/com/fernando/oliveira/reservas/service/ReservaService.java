@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fernando.oliveira.reservas.domain.Reserva;
+import com.fernando.oliveira.reservas.domain.Viajante;
 import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 import com.fernando.oliveira.reservas.repository.ReservaRepository;
@@ -21,13 +22,23 @@ public class ReservaService {
 	@Autowired
 	private ReservaRepository repository;
 	
+	@Autowired
+	private ViajanteService viajanteService;
+	
 	
 	@Transactional
-	public Reserva insert(Reserva entity) {
+	public Reserva insert(Reserva reserva) {
 		
-		repository.save(entity);
+		Viajante viajante = viajanteService.find(reserva.getViajante().getId());
 		
-		return entity;
+		if(viajante == null) {
+			return null;
+		}
+		
+		reserva.setViajante(viajante);
+		repository.save(reserva);
+		
+		return reserva;
 	}
 
 	public Reserva fromDTO(@Valid ReservaDTO dto) {

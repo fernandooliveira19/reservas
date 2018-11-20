@@ -50,6 +50,7 @@ public class Viajante implements Serializable {
 	private List<Telefone> telefones;
 	
 	
+	
 	@OneToMany(mappedBy="viajante")
 	private List<Reserva> reservas;
 	
