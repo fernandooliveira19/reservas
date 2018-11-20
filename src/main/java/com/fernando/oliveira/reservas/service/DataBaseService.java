@@ -35,16 +35,17 @@ public class DataBaseService {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		
-		
 		Viajante bruno = new Viajante(null, "Bruno Maretta","bruno.maretta@gmail.com",new Date());
 		
-		Telefone t1 = new Telefone(null, "11", "999998888", TipoTelefone.CELULAR, bruno);
+		Telefone foneBruno = new Telefone(null, "11", "999998888", TipoTelefone.CELULAR, bruno);
 		
 		
 		//cria um viajante
 		viajanteService.insert(bruno);
+		
 		//cria um telefone e atribui ao viajante
-		telefoneService.insert(t1);
+		foneBruno.setViajante(bruno);
+		telefoneService.insert(foneBruno);
 		
 		//cria uma reserva
 		Reserva reservaBruno = new Reserva(null,"", sdf.parse("28/12/2017 18:00"),sdf.parse("03/01/2018 20:00"),SituacaoReserva.RESERVADO,bruno, 3600.00, null);
@@ -55,15 +56,13 @@ public class DataBaseService {
 //		valorReservaService.insert(valorReserva01);
 		
 		
-		Lancamento lancamento1 = new Lancamento(null, sdf.parse("01/01/2018 13:00"), 500.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PENDENTE, reservaBruno, null);
-		Lancamento lancamento2 = new Lancamento(null, sdf.parse("03/01/2018 13:00"), 1500.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PENDENTE, reservaBruno, null);
+		Lancamento lancamento1 = new Lancamento(null, sdf.parse("20/12/2017 13:00"), 1830.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PAGO, reservaBruno, null);
+		Lancamento lancamento2 = new Lancamento(null, sdf.parse("27/12/2017 13:00"), 1830.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PENDENTE, reservaBruno, null);
 		
 		lancamentoService.insert(lancamento1);
 		lancamentoService.insert(lancamento2);
 		
 		
-		
-		//
 		
 		
 	}

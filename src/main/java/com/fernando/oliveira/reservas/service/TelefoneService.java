@@ -9,20 +9,33 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fernando.oliveira.reservas.domain.Telefone;
+import com.fernando.oliveira.reservas.domain.Viajante;
 import com.fernando.oliveira.reservas.domain.dto.TelefoneDTO;
 import com.fernando.oliveira.reservas.repository.TelefoneRepository;
 
 @Service
 public class TelefoneService {
+	
+	
 	@Autowired
 	private TelefoneRepository repository;
+	
+	@Autowired
+	private ViajanteService viajanteService;
 
 	@Transactional
-	public Telefone insert(Telefone entity) {
+	public Telefone insert(Telefone telefone) {
 
-		repository.save(entity);
+		Viajante viajante = viajanteService.find(telefone.getViajante().getId());
+		
+		if(viajante == null) {
+			return null;
+		}
+		telefone.setViajante(viajante);
+		
+		repository.save(telefone);
 
-		return entity;
+		return telefone;
 	}
 
 	

@@ -14,8 +14,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Viajante implements Serializable {
@@ -43,6 +45,7 @@ public class Viajante implements Serializable {
 	/**
 	 * Relationships
 	 */
+	@JsonManagedReference
 	@OneToMany(mappedBy="viajante")
 	private List<Telefone> telefones;
 	

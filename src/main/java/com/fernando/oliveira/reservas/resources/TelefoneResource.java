@@ -27,8 +27,7 @@ public class TelefoneResource {
 	private TelefoneService service;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody TelefoneDTO dto){
-		Telefone obj = service.fromDTO(dto);
+	public ResponseEntity<Void> insert(@Valid @RequestBody Telefone obj){
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
