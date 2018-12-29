@@ -59,5 +59,9 @@ public class ViajanteService {
 		List<Viajante> lista = repository.findAll();
 		return lista;
 	}
+	public boolean viajanteTemReservas(Integer id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }

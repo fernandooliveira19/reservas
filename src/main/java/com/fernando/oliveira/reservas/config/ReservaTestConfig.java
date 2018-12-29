@@ -20,7 +20,7 @@ public class ReservaTestConfig {
 	@Bean 
 	public boolean instantiateDatabase() throws ParseException{
 		
-		dataBaseService.instantiateDatabase();
+//		dataBaseService.instantiateDatabase();
 		
 		return true;
 	}
