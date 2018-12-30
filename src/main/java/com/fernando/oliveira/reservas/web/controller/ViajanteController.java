@@ -58,6 +58,7 @@ public class ViajanteController {
 	
 	@PostMapping("/editar")
 	public String editar(Viajante viajante, RedirectAttributes attr) {
+		telefoneService.update(viajante.getTelefone());
 		viajanteService.update(viajante);
 		attr.addFlashAttribute("success", "Viajante editado com sucesso.");
 		return "redirect:/viajantes/cadastrar";
