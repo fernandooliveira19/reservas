@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fernando.oliveira.reservas.domain.Telefone;
 import com.fernando.oliveira.reservas.domain.Viajante;
+import com.fernando.oliveira.reservas.service.TelefoneService;
 import com.fernando.oliveira.reservas.service.ViajanteService;
 
 @Controller
@@ -20,6 +22,9 @@ public class ViajanteController {
 	
 	@Autowired
 	private ViajanteService viajanteService;
+	
+	@Autowired
+	private TelefoneService telefoneService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Viajante viajante) {
@@ -36,7 +41,9 @@ public class ViajanteController {
 	
 	@PostMapping("/salvar")
 	public String salvar(Viajante viajante, RedirectAttributes attr) {
-	
+		
+		telefoneService.insert(viajante.getTelefone());
+		
 		viajanteService.insert(viajante);
 		
 		attr.addFlashAttribute("success", "Viajante inserido com sucesso");

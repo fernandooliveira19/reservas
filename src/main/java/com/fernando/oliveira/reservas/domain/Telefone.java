@@ -2,6 +2,7 @@ package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -42,9 +44,7 @@ public class Telefone implements Serializable {
 	 */
 	
 	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="ID_VIAJANTE")
+	@OneToOne(mappedBy = "telefone", cascade = CascadeType.ALL)
 	private Viajante viajante;
 
 	public Telefone() {

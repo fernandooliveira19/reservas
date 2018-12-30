@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -45,9 +48,10 @@ public class Viajante implements Serializable {
 	/**
 	 * Relationships
 	 */
-	@JsonManagedReference
-	@OneToMany(mappedBy="viajante")
-	private List<Telefone> telefones;
+	@OneToOne
+	@JoinColumn(name="ID_TELEFONE")
+	@JsonIgnore
+	private Telefone telefone;
 	
 	
 	
@@ -86,11 +90,11 @@ public class Viajante implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public List<Telefone> getTelefones() {
-		return telefones;
+	public Telefone getTelefone() {
+		return telefone;
 	}
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
 	}
 	public List<Reserva> getReservas() {
 		return reservas;
