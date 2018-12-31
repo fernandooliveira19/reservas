@@ -39,28 +39,30 @@ public class DataBaseService {
 		
 		Telefone foneBruno = new Telefone(null, "11", "999998888", TipoTelefone.CELULAR, bruno);
 		
-		
-		//cria um viajante
-		viajanteService.insert(bruno);
-		
 		//cria um telefone e atribui ao viajante
-		foneBruno.setViajante(bruno);
 		telefoneService.insert(foneBruno);
 		
+		//cria um viajante
+		bruno.setTelefone(foneBruno);
+		viajanteService.insert(bruno);
+		
+		
+		
+		
 		//cria uma reserva
-		Reserva reservaBruno = new Reserva(null,"", sdf.parse("28/12/2017 18:00"),sdf.parse("03/01/2018 20:00"),SituacaoReserva.RESERVADO,bruno, 3600.00, null);
-		reservaService.insert(reservaBruno);
+//		Reserva reservaBruno = new Reserva(null,"", sdf.parse("28/12/2017 18:00"),sdf.parse("03/01/2018 20:00"),SituacaoReserva.RESERVADO,bruno, 3600.00, null);
+//		reservaService.insert(reservaBruno);
 		
 		//cria um valorReserva e atribui ao uma reserva
 //		ValorReserva valorReserva01 = new ValorReserva(null, 2000.00, 0.00, 2000.00, reservaBruno);
 //		valorReservaService.insert(valorReserva01);
 		
 		
-		Lancamento lancamento1 = new Lancamento(null, sdf.parse("20/12/2017 13:00"), 1830.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PAGO, reservaBruno, null);
-		Lancamento lancamento2 = new Lancamento(null, sdf.parse("27/12/2017 13:00"), 1830.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PENDENTE, reservaBruno, null);
-		
-		lancamentoService.insert(lancamento1);
-		lancamentoService.insert(lancamento2);
+//		Lancamento lancamento1 = new Lancamento(null, sdf.parse("20/12/2017 13:00"), 1830.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PAGO, reservaBruno, null);
+//		Lancamento lancamento2 = new Lancamento(null, sdf.parse("27/12/2017 13:00"), 1830.00, FormaPagamento.TRANSFERENCIA, SituacaoPagamento.PENDENTE, reservaBruno, null);
+//		
+//		lancamentoService.insert(lancamento1);
+//		lancamentoService.insert(lancamento2);
 		
 		
 		

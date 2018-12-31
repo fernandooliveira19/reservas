@@ -36,6 +36,7 @@ public class ReservaService {
 		}
 		
 		reserva.setViajante(viajante);
+		reserva.setSituacaoReserva(SituacaoReserva.RESERVADO);
 		repository.save(reserva);
 		
 		return reserva;

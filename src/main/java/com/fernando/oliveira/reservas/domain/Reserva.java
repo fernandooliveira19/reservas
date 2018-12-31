@@ -1,6 +1,7 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -32,18 +33,18 @@ public class Reserva implements Serializable {
 	private String codigo;
 
 	@Column(name = "DATA_ENTRADA")
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date dataEntrada;
+//	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
+	private String dataEntrada;
 
 	@Column(name = "DATA_SAIDA")
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date dataSaida;
+//	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private String dataSaida;
 
 	@Column(name = "SIT_RESERVA")
 	private Integer situacaoReserva;
 	
-	@Column(name = "VLR_TOTAL")
-	private Double valorTotal;
+	@Column(name = "VLR_TOTAL", nullable = false)
+	private String valorTotal;
 	
 	
 	@ManyToOne
@@ -60,8 +61,8 @@ public class Reserva implements Serializable {
 
 	}
 
-	public Reserva(Integer id, String codigo, Date dataEntrada, Date dataSaida, SituacaoReserva situacaoReserva,
-			Viajante viajante, Double valorTotal, Contrato contrato) {
+	public Reserva(Integer id, String codigo, String dataEntrada, String dataSaida, SituacaoReserva situacaoReserva,
+			Viajante viajante, String valorTotal, Contrato contrato) {
 		
 		this.id = id;
 		this.codigo = codigo;
@@ -89,19 +90,19 @@ public class Reserva implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public Date getDataEntrada() {
+	public String getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(Date dataEntrada) {
+	public void setDataEntrada(String dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public Date getDataSaida() {
+	public String getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(Date dataSaida) {
+	public void setDataSaida(String dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 
@@ -130,11 +131,11 @@ public class Reserva implements Serializable {
 		this.contrato = contrato;
 	}
 
-	public Double getValorTotal() {
+	public String getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(Double valorTotal) {
+	public void setValorTotal(String valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 

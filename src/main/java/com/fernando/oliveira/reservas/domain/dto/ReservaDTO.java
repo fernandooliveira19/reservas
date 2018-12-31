@@ -1,9 +1,8 @@
 package com.fernando.oliveira.reservas.domain.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.Contrato;
 import com.fernando.oliveira.reservas.domain.Reserva;
@@ -15,12 +14,12 @@ public class ReservaDTO implements Serializable {
 
 	private Integer id;
 	private String codigo;
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date dataEntrada;
-	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private Date dataSaida;
+//	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private String dataEntrada;
+//	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
+	private String dataSaida;
 	private Integer situacaoReserva;
-	private Double valorTotal;
+	private String valorTotal;
 	@JsonIgnore
 	private Viajante viajante;
 	private Contrato contrato;
@@ -28,8 +27,8 @@ public class ReservaDTO implements Serializable {
 	public ReservaDTO() {
 		
 	}
-	public ReservaDTO(Integer id, String codigo, Date dataEntrada, Date dataSaida, Integer situacaoReserva,
-			Double valorTotal, Viajante viajante, Contrato contrato) {
+	public ReservaDTO(Integer id, String codigo, String dataEntrada, String dataSaida, Integer situacaoReserva,
+			String valorTotal, Viajante viajante, Contrato contrato) {
 		
 		this.id = id;
 		this.codigo = codigo;
@@ -62,16 +61,16 @@ public class ReservaDTO implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public Date getDataEntrada() {
+	public String getDataEntrada() {
 		return dataEntrada;
 	}
-	public void setDataEntrada(Date dataEntrada) {
+	public void setDataEntrada(String dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
-	public Date getDataSaida() {
+	public String getDataSaida() {
 		return dataSaida;
 	}
-	public void setDataSaida(Date dataSaida) {
+	public void setDataSaida(String dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 	public Integer getSituacaoReserva() {
@@ -80,10 +79,10 @@ public class ReservaDTO implements Serializable {
 	public void setSituacaoReserva(Integer situacaoReserva) {
 		this.situacaoReserva = situacaoReserva;
 	}
-	public Double getValorTotal() {
+	public String getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(Double valorTotal) {
+	public void setValorTotal(String valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	public Viajante getViajante() {
