@@ -1,7 +1,8 @@
 package com.fernando.oliveira.reservas.domain.dto;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.Contrato;
@@ -15,9 +16,9 @@ public class ReservaDTO implements Serializable {
 	private Integer id;
 	private String codigo;
 //	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private String dataEntrada;
+	private LocalDateTime dataEntrada;
 //	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private String dataSaida;
+	private LocalDateTime dataSaida;
 	private Integer situacaoReserva;
 	private String valorTotal;
 	@JsonIgnore
@@ -27,7 +28,7 @@ public class ReservaDTO implements Serializable {
 	public ReservaDTO() {
 		
 	}
-	public ReservaDTO(Integer id, String codigo, String dataEntrada, String dataSaida, Integer situacaoReserva,
+	public ReservaDTO(Integer id, String codigo, LocalDateTime dataEntrada, LocalDateTime dataSaida, Integer situacaoReserva,
 			String valorTotal, Viajante viajante, Contrato contrato) {
 		
 		this.id = id;
@@ -42,6 +43,7 @@ public class ReservaDTO implements Serializable {
 	public ReservaDTO(Reserva obj) {
 		this.id = obj.getId();
 		this.codigo = obj.getCodigo();
+//		this.dataEntrada = DateUtils.parseDateToString(obj.getDataEntrada());
 		this.dataEntrada = obj.getDataEntrada();
 		this.dataSaida = obj.getDataSaida();
 		this.situacaoReserva = obj.getSituacaoReserva().getCodigo();
@@ -61,16 +63,16 @@ public class ReservaDTO implements Serializable {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	public String getDataEntrada() {
+	public LocalDateTime getDataEntrada() {
 		return dataEntrada;
 	}
-	public void setDataEntrada(String dataEntrada) {
+	public void setDataEntrada(LocalDateTime dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
-	public String getDataSaida() {
+	public LocalDateTime getDataSaida() {
 		return dataSaida;
 	}
-	public void setDataSaida(String dataSaida) {
+	public void setDataSaida(LocalDateTime dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 	public Integer getSituacaoReserva() {

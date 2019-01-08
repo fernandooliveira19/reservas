@@ -23,22 +23,22 @@
 	
 	            <p>
 	                <i class="oi oi-magnifying-glass"></i><span></span>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseViajante"
 	                        aria-controls="collapseNome">Viajantes
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
-	                        aria-controls="collapseCargo">Reservas
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseLancamento"
+	                        aria-controls="collapseCargo">Lançamentos
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseData"
-	                        aria-controls="collapseData">Datas
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseReserva"
+	                        aria-controls="collapseData">Reservas
 	                </button>
 	            </p>
 	            <div class="row">
 	                <div class="col">
-	                    <div class="collapse" id="collapseNome">
+	                    <div class="collapse" id="collapseViajante">
 	
 	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/reservas/buscar/nome">
+	                            <form class="form-inline" method="GET" action="/reservas/buscar/viajante">
 	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
 	                                       name="nome" />
 	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
@@ -50,7 +50,7 @@
 	            </div>
 	            <div class="row">
 	                <div class="col">
-	                    <div class="collapse" id="collapseCargo">
+	                    <div class="collapse" id="collapseLancamento">
 	
 	                        <nav class="navbar navbar-light bg-light">
 	                            <form class="form-inline" method="GET" action="/funcionarios/buscar/cargo">
@@ -77,7 +77,7 @@
 	            </div>
 	            <div class="row">
 	                <div class="col">
-	                    <div class="collapse" id="collapseData">
+	                    <div class="collapse" id="collapseReserva">
 	
 	                        <nav class="navbar navbar-light bg-light">
 	                            <form class="form-inline" method="GET" action="/funcionarios/buscar/data">
@@ -99,32 +99,25 @@
 	                    <thead>
 	                    <tr>
 	                        <th>#</th>
-	                        <th>Nome</th>
-	                        <th>Salário</th>
-	                        <th>Departamento</th>
-	                        <th>Cargo</th>
-	                        <th>Endereço</th>
-	                        <th>Data de Entrada</th>
-	                        <th>Data de Saída</th>
+	                        <th>Check in</th>
+	                        <th>Check out</th>
+	                        <th>Viajante</th>
+	                        <th>Valor</th>
+	                        <th>Pagamento</th>
+	                        <th>Situação</th>
 	                        <th>Ação</th>
 	                    </tr>
 	                    </thead>
 	                    <tbody>
 	                    <tr>
 	                        <td>1</td>
-	                        <td>Jorge da Silva</td>
-	                        <td>R$ 3.500,99</td>
-	                        <td>Recursos Humanos</td>
-	                        <td>Auxiliar de RH</td>
-	                        <td>
-	                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
-	                                    data-toggle="popover" data-placement="top"
-	                                    data-content="Rua das Oliveiras, 260 Fundos - Centro, Porto Alegre - RS - 97050-015">
-	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                        <td>01/10/2014</td>
-	                        <td></td>
+	                        <td>29/12/2018 10:00</td>
+	                        <td>03/01/2019 19:00</td>
+	                        <td>Bruno Maretta</td>
+	                        <td>R$ 3.500,00</td>
+	                        <td>Quitado</td>
+	                        <td>Reservado</td>
+	                       
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" href="/funcionarios/editar/1" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
@@ -135,106 +128,7 @@
 	                            </button>
 	                        </td>
 	                    </tr>
-	                    <tr>
-	                        <td>2</td>
-	                        <td>Ana Maria Lindoval</td>
-	                        <td>R$ 3.560,70</td>
-	                        <td>Administração</td>
-	                        <td>Auxiliar Administrativo</td>
-	                        <td>
-	                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
-	                                    data-toggle="popover" data-placement="top"
-	                                    data-content="Av. dos Palmares, 320  - Ribeirão, Canoas - RS - 98050-908">
-	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                        <td>01/08/2014</td>
-	                        <td>02/03/2015</td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/funcionarios/editar/2" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button id="btn_funcionarios/excluir/2" type="button" class="btn btn-danger btn-sm"
-	                                    data-toggle="modal" data-target="#myModal">
-	                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>3</td>
-	                        <td>Juan Perez</td>
-	                        <td>R$ 4.060,99</td>
-	                        <td>Tecnologia da Informação</td>
-	                        <td>Desenvolvedor Java Jr.</td>
-	                        <td>
-	                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
-	                                    data-toggle="popover" data-placement="top"
-	                                    data-content="Rua Senador Cassiano do Nascimento, 135 AP. 106 - Noroeste, Porto Alegre - RS - 90798-099">
-	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                        <td>05/01/2015</td>
-	                        <td></td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/funcionarios/editar/3" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button id="btn_funcionarios/excluir/3" type="button" class="btn btn-danger btn-sm"
-	                                    data-toggle="modal" data-target="#myModal">
-	                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>4</td>
-	                        <td>Marcio Silva</td>
-	                        <td>R$ 2.890,99</td>
-	                        <td>Contabilidade</td>
-	                        <td>Auxiliar Contábil</td>
-	                        <td>
-	                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
-	                                    data-toggle="popover" data-placement="top"
-	                                    data-content="Av. Maracanã, 309 AP. 108 - Maracanã, Rio de Janeiro - RJ - 91050-980">
-	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                        <td>18/10/2013</td>
-	                        <td>06/09/2015</td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/funcionarios/editar/4" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button id="btn_funcionarios/excluir/4" type="button" class="btn btn-danger btn-sm"
-	                                    data-toggle="modal" data-target="#myModal">
-	                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
-	                    <tr>
-	                        <td>5</td>
-	                        <td>Joana Prado</td>
-	                        <td>R$ 3.804,00</td>
-	                        <td>Recursos Humanos</td>
-	                        <td>Coordenador de RH</td>
-	                        <td>
-	                            <button type="button" class="btn btn-secondary btn-sm" data-container="body"
-	                                    data-toggle="popover" data-placement="top"
-	                                    data-content="Rua Gomes Carneiro, 909  - Centro, Porto Alegre - RS - 98080-999">
-	                                <span class="oi oi-eye" title="Visualizar" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                        <td>01/05/2015</td>
-	                        <td></td>
-	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/funcionarios/editar/5" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-	                            </a>
-	                            <button id="btn_funcionarios/excluir/5" type="button" class="btn btn-danger btn-sm"
-	                                    data-toggle="modal" data-target="#myModal">
-	                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-	                            </button>
-	                        </td>
-	                    </tr>
+	                    
 	                    </tbody>
 	                </table>
 	            </div>

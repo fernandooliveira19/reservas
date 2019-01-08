@@ -42,13 +42,13 @@ public class ReservaService {
 		return reserva;
 	}
 
-	public Reserva fromDTO(@Valid ReservaDTO dto) {
-		
-		Reserva viajante = new Reserva(null, dto.getCodigo(), dto.getDataEntrada(), dto.getDataSaida(), SituacaoReserva.toEnum(dto.getSituacaoReserva()),
-				dto.getViajante(),dto.getValorTotal(),  null);
-		
-		return viajante;
-	}
+//	public Reserva fromDTO(@Valid ReservaDTO dto) {
+//		
+//		Reserva viajante = new Reserva(null, dto.getCodigo(), dto.getDataEntrada(), dto.getDataSaida(), SituacaoReserva.toEnum(dto.getSituacaoReserva()),
+//				dto.getViajante(),dto.getValorTotal(),  null);
+//		
+//		return viajante;
+//	}
 
 	public Reserva update(Reserva obj) {
 		Reserva newObj = find(obj.getId());

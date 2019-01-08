@@ -1,8 +1,7 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,8 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 
 @Entity
@@ -33,12 +34,14 @@ public class Reserva implements Serializable {
 	private String codigo;
 
 	@Column(name = "DATA_ENTRADA")
-//	@JsonFormat(pattern="yyyy-MM-dd HH:mm")
-	private String dataEntrada;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime dataEntrada;
 
 	@Column(name = "DATA_SAIDA")
-//	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
-	private String dataSaida;
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	private LocalDateTime dataSaida;
 
 	@Column(name = "SIT_RESERVA")
 	private Integer situacaoReserva;
@@ -61,7 +64,7 @@ public class Reserva implements Serializable {
 
 	}
 
-	public Reserva(Integer id, String codigo, String dataEntrada, String dataSaida, SituacaoReserva situacaoReserva,
+	public Reserva(Integer id, String codigo, LocalDateTime dataEntrada, LocalDateTime dataSaida, SituacaoReserva situacaoReserva,
 			Viajante viajante, String valorTotal, Contrato contrato) {
 		
 		this.id = id;
@@ -72,6 +75,17 @@ public class Reserva implements Serializable {
 		this.viajante = viajante;
 		this.valorTotal = valorTotal;
 		this.contrato = contrato;
+	}
+	
+	public Reserva (ReservaDTO dto) {
+		this.id = dto.getId();
+		this.codigo = dto.getCodigo();
+//		this.dataEntrada = DateUtils.parseStringToDate(dto.getDataEntrada(),"");
+//		this.dataSaida = dto.getDataSaida();
+		this.situacaoReserva = dto.getSituacaoReserva();
+		this.valorTotal = dto.getValorTotal();
+		this.viajante = dto.getViajante();
+		this.contrato = dto.getContrato();
 	}
 
 	public Integer getId() {
@@ -90,19 +104,19 @@ public class Reserva implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public String getDataEntrada() {
+	public LocalDateTime getDataEntrada() {
 		return dataEntrada;
 	}
 
-	public void setDataEntrada(String dataEntrada) {
+	public void setDataEntrada(LocalDateTime dataEntrada) {
 		this.dataEntrada = dataEntrada;
 	}
 
-	public String getDataSaida() {
+	public LocalDateTime getDataSaida() {
 		return dataSaida;
 	}
 
-	public void setDataSaida(String dataSaida) {
+	public void setDataSaida(LocalDateTime dataSaida) {
 		this.dataSaida = dataSaida;
 	}
 

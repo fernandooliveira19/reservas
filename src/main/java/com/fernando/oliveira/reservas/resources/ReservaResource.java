@@ -37,8 +37,8 @@ public class ReservaResource {
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ReservaDTO dto, @PathVariable Integer id){
 		dto.setId(id);
-		Reserva obj = service.fromDTO(dto);
-		obj = service.update(obj);
+//		Reserva obj = service.fromDTO(dto);
+//		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 		
 	}

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.Viajante;
+import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 import com.fernando.oliveira.reservas.service.ReservaService;
 import com.fernando.oliveira.reservas.service.ViajanteService;
@@ -42,7 +43,7 @@ public class ReservaController {
 	
 	@PostMapping("/salvar")
 	public String salvar(Reserva reserva, RedirectAttributes attr) {
-		
+//		Reserva reserva = new Reserva(dto); 
 		reservaService.insert(reserva);
 		
 		attr.addFlashAttribute("success", "Reserva inserida com sucesso");
