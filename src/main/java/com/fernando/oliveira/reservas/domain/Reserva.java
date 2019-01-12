@@ -21,7 +21,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
+import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
+import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
 
 @Entity
 public class Reserva implements Serializable {
@@ -49,6 +51,10 @@ public class Reserva implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private SituacaoReserva situacaoReserva;
 	
+	@Column(nullable = true)
+	@Enumerated(EnumType.STRING)
+	private SituacaoPagamento situacaoPagamento;
+	
 	@Column(name = "VLR_TOTAL", nullable = false)
 	private String valorTotal;
 	
@@ -62,7 +68,8 @@ public class Reserva implements Serializable {
 
 	@OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL)
 	private Contrato contrato;
-
+	
+	
 	public Reserva() {
 
 	}
@@ -164,5 +171,27 @@ public class Reserva implements Serializable {
 		this.lancamentos = lancamentos;
 	}
 
+	public SituacaoPagamento getSituacaoPagamento() {
+		return situacaoPagamento;
+	}
+
+	public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
+		this.situacaoPagamento = situacaoPagamento;
+	}
+
+	public String getDataEntradaFormatada() {
+		
+		return ReservaDateUtils.formatarDataLocal(dataEntrada);
+	}
+	
+	
+	public String getDataSaidaFormatada() {
+		
+		return ReservaDateUtils.formatarDataLocal(dataSaida);
+	}
+
+	
+
+	
 	
 }

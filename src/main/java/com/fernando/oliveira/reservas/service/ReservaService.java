@@ -3,17 +3,15 @@ package com.fernando.oliveira.reservas.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fernando.oliveira.reservas.domain.Lancamento;
 import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.Viajante;
-import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
-import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
+import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.repository.ReservaRepository;
 
 @Service
@@ -69,6 +67,32 @@ public class ReservaService {
 	
 	public List<Reserva> findAll() {
 		List<Reserva> lista = repository.findAll();
+		
+		for(Reserva reserva : lista) {
+			
+			if(reserva.getLancamentos() != null
+					&& reserva.getLancamentos().isEmpty()) {
+				reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
+				continue;
+			}else {
+				
+				for(Lancamento lancamento : reserva.getLancamentos()) {
+					
+					if(lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
+						
+						reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
+						break;
+					}
+					
+					reserva.setSituacaoPagamento(SituacaoPagamento.PAGO);
+				}
+				
+			}
+			
+			
+			
+		}
+		
 		return lista;
 	}
 

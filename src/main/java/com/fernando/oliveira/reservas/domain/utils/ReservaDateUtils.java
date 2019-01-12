@@ -1,9 +1,13 @@
 package com.fernando.oliveira.reservas.domain.utils;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
+import java.util.Locale;
 
-public class DateUtils {
+public class ReservaDateUtils {
 
 	
 	public static Date parseStringToDate(String data, String pattern) {
@@ -21,6 +25,15 @@ public class DateUtils {
 	public static String parseDateToString(Date date) {
 		
 		return date.toString();
+		
+	}
+	
+	public static String formatarDataLocal(LocalDateTime data) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter
+		  .ofLocalizedDateTime(FormatStyle.SHORT)
+		  .withLocale(new Locale("pt", "br"));
+		return data.format(formatter);
 		
 	}
 }

@@ -98,7 +98,6 @@
 	                <table class="table table-striped table-hover table-sm">
 	                    <thead>
 	                    <tr>
-	                        <th>#</th>
 	                        <th>Check in</th>
 	                        <th>Check out</th>
 	                        <th>Viajante</th>
@@ -109,17 +108,17 @@
 	                    </tr>
 	                    </thead>
 	                    <tbody>
-	                    <tr>
-	                        <td>1</td>
-	                        <td>29/12/2018 10:00</td>
-	                        <td>03/01/2019 19:00</td>
-	                        <td>Bruno Maretta</td>
-	                        <td>R$ 3.500,00</td>
-	                        <td>Quitado</td>
-	                        <td>Reservado</td>
+	                    <tr th:each="r : ${reservas}">
+	                        <td th:text="${r.dataEntradaFormatada}">29/12/2018 10:00</td>
+	                        <td th:text="${r.dataSaidaFormatada}">03/01/2019 19:00</td>
+	                        <td th:text="${r.viajante.nome}">Bruno Maretta</td>
+	                        <td th:text="${r.valorTotal}">R$ 3.500,00</td>
+	                        <td th:text="${r.situacaoPagamento}">Quitado</td>
+	                        <td th:text="${r.situacaoReserva}">Reservado</td>
 	                       
 	                        <td colspan="2">
-	                            <a class="btn btn-info btn-sm" href="/funcionarios/editar/1" role="button">
+	                            <a class="btn btn-info btn-sm" 
+	                            th:href="@{/reservas/editar/{id} (id=${r.id})}" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 	                            </a>
 	                            <button id="btn_funcionarios/excluir/1" type="button" class="btn btn-danger btn-sm"
