@@ -46,7 +46,7 @@ public class ReservaDTO implements Serializable {
 //		this.dataEntrada = DateUtils.parseDateToString(obj.getDataEntrada());
 		this.dataEntrada = obj.getDataEntrada();
 		this.dataSaida = obj.getDataSaida();
-		this.situacaoReserva = obj.getSituacaoReserva().getCodigo();
+//		this.situacaoReserva = obj.getSituacaoReserva().getCodigo();
 		this.valorTotal = obj.getValorTotal();
 		this.viajante = obj.getViajante();
 		this.contrato = obj.getContrato();

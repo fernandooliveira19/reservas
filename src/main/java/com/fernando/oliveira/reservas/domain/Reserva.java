@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,8 +45,9 @@ public class Reserva implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime dataSaida;
 
-	@Column(name = "SIT_RESERVA")
-	private Integer situacaoReserva;
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private SituacaoReserva situacaoReserva;
 	
 	@Column(name = "VLR_TOTAL", nullable = false)
 	private String valorTotal;
@@ -71,22 +74,22 @@ public class Reserva implements Serializable {
 		this.codigo = codigo;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
-		this.situacaoReserva = situacaoReserva.getCodigo();
+		this.situacaoReserva = situacaoReserva;
 		this.viajante = viajante;
 		this.valorTotal = valorTotal;
 		this.contrato = contrato;
 	}
 	
-	public Reserva (ReservaDTO dto) {
-		this.id = dto.getId();
-		this.codigo = dto.getCodigo();
-//		this.dataEntrada = DateUtils.parseStringToDate(dto.getDataEntrada(),"");
-//		this.dataSaida = dto.getDataSaida();
-		this.situacaoReserva = dto.getSituacaoReserva();
-		this.valorTotal = dto.getValorTotal();
-		this.viajante = dto.getViajante();
-		this.contrato = dto.getContrato();
-	}
+//	public Reserva (ReservaDTO dto) {
+//		this.id = dto.getId();
+//		this.codigo = dto.getCodigo();
+////		this.dataEntrada = DateUtils.parseStringToDate(dto.getDataEntrada(),"");
+////		this.dataSaida = dto.getDataSaida();
+//		this.situacaoReserva = dto.getSituacaoReserva();
+//		this.valorTotal = dto.getValorTotal();
+//		this.viajante = dto.getViajante();
+//		this.contrato = dto.getContrato();
+//	}
 
 	public Integer getId() {
 		return id;
@@ -121,11 +124,11 @@ public class Reserva implements Serializable {
 	}
 
 	public SituacaoReserva getSituacaoReserva() {
-		return SituacaoReserva.toEnum(situacaoReserva);
+		return situacaoReserva;
 	}
 
 	public void setSituacaoReserva(SituacaoReserva situacaoReserva) {
-		this.situacaoReserva = situacaoReserva.getCodigo();
+		this.situacaoReserva = situacaoReserva;
 	}
 
 	public Viajante getViajante() {

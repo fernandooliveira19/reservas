@@ -2,20 +2,21 @@ package com.fernando.oliveira.reservas.domain.enums;
 
 public enum SituacaoReserva {
 
-	RESERVADO(1,"Reservado"),
-	CANCELADO(2,"Cancelado"),
-	PRE_RESERVA(3,"Pré Reservado");
+	RESERVADO("R","Reservado"),
+	CANCELADO("C","Cancelado"),
+	PRE_RESERVA("P","Pré Reservado"),
+	FINALIZADO("F","Finalizado");
 	
-	private Integer codigo;
+	private String codigo;
 	private String descricao;
 	
-	SituacaoReserva(Integer codigo, String descricao) {
+	SituacaoReserva(String codigo, String descricao) {
 	
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
@@ -23,7 +24,7 @@ public enum SituacaoReserva {
 		return descricao;
 	}
 	
-    public static SituacaoReserva toEnum(Integer codigo) {
+    public static SituacaoReserva toEnum(String codigo) {
 		
 		if(codigo == null){
 			return null;

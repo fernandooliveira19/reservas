@@ -81,6 +81,11 @@ public class ReservaController {
 			
 		return viajanteService.findAll();
 	}
+	
+	@ModelAttribute("situacoesReserva")
+	public SituacaoReserva[] listaSituacoes() {
+		return SituacaoReserva.values();
+	}
 
 
 }
