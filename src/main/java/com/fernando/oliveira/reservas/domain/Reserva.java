@@ -1,6 +1,7 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,9 +19,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
@@ -55,8 +57,9 @@ public class Reserva implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private SituacaoPagamento situacaoPagamento;
 	
-	@Column(name = "VLR_TOTAL", nullable = false)
-	private String valorTotal;
+	@NumberFormat(style=Style.CURRENCY, pattern="#,##0.00")
+	@Column(name = "VLR_TOTAL", nullable = false, columnDefinition="DECIMAL(7,2) DEFAULT 0.00")
+	private BigDecimal valorTotal;
 	
 	
 	@ManyToOne
@@ -75,7 +78,7 @@ public class Reserva implements Serializable {
 	}
 
 	public Reserva(Integer id, LocalDateTime dataEntrada, LocalDateTime dataSaida, SituacaoReserva situacaoReserva,
-			Viajante viajante, String valorTotal, Contrato contrato) {
+			Viajante viajante, BigDecimal valorTotal, Contrato contrato) {
 		
 		this.id = id;
 		this.dataEntrada = dataEntrada;
@@ -154,11 +157,11 @@ public class Reserva implements Serializable {
 		this.contrato = contrato;
 	}
 
-	public String getValorTotal() {
+	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
 
-	public void setValorTotal(String valorTotal) {
+	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 

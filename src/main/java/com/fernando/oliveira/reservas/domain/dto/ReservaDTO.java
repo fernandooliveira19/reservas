@@ -1,6 +1,7 @@
 package com.fernando.oliveira.reservas.domain.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class ReservaDTO implements Serializable {
 //	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private LocalDateTime dataSaida;
 	private Integer situacaoReserva;
-	private String valorTotal;
+	private BigDecimal valorTotal;
 	@JsonIgnore
 	private Viajante viajante;
 	private Contrato contrato;
@@ -29,7 +30,7 @@ public class ReservaDTO implements Serializable {
 		
 	}
 	public ReservaDTO(Integer id, String codigo, LocalDateTime dataEntrada, LocalDateTime dataSaida, Integer situacaoReserva,
-			String valorTotal, Viajante viajante, Contrato contrato) {
+			BigDecimal valorTotal, Viajante viajante, Contrato contrato) {
 		
 		this.id = id;
 		this.codigo = codigo;
@@ -81,10 +82,10 @@ public class ReservaDTO implements Serializable {
 	public void setSituacaoReserva(Integer situacaoReserva) {
 		this.situacaoReserva = situacaoReserva;
 	}
-	public String getValorTotal() {
+	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(String valorTotal) {
+	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	public Viajante getViajante() {

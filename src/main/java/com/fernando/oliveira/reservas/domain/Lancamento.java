@@ -1,8 +1,8 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,17 +33,14 @@ public class Lancamento implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-//	@Column(name="DAT_LANCAMENTO")
-//	@JsonFormat(pattern="dd/MM/yyyy")
-//	private Date dataLancamento;
-	
 	@Column(name = "DAT_LANCAMENTO")
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataLancamento;
 	
-	@Column(name="VLR_LANCAMENTO")
-	private String valorLancamento;
+	@NumberFormat(style=Style.CURRENCY, pattern="#,##0.00")
+	@Column(name = "VLR_LANCAMENTO", nullable = false, columnDefinition="DECIMAL(7,2) DEFAULT 0.00")
+	private BigDecimal valorLancamento;
 	
 	@Column(nullable = true, name="FRM_PAGAMENTO")
 	@Enumerated(EnumType.STRING)
@@ -68,7 +67,7 @@ public class Lancamento implements Serializable {
 		
 	}
 
-	public Lancamento(Integer id, LocalDate dataLancamento, String valorLancamento, FormaPagamento formaPagamento,
+	public Lancamento(Integer id, LocalDate dataLancamento, BigDecimal valorLancamento, FormaPagamento formaPagamento,
 			SituacaoPagamento situacaoPagamento, Reserva reserva,LocalDate dataPagamento) {
 		
 		this.id = id;
@@ -96,11 +95,11 @@ public class Lancamento implements Serializable {
 		this.dataLancamento = dataLancamento;
 	}
 
-	public String getValorLancamento() {
+	public BigDecimal getValorLancamento() {
 		return valorLancamento;
 	}
 
-	public void setValorLancamento(String valorLancamento) {
+	public void setValorLancamento(BigDecimal valorLancamento) {
 		this.valorLancamento = valorLancamento;
 	}
 
