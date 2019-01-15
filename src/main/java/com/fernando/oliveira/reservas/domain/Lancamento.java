@@ -1,15 +1,20 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,22 +31,33 @@ public class Lancamento implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="DAT_LANCAMENTO")
-	@JsonFormat(pattern="dd/MM/yyyy")
-	private Date dataLancamento;
+//	@Column(name="DAT_LANCAMENTO")
+//	@JsonFormat(pattern="dd/MM/yyyy")
+//	private Date dataLancamento;
+	
+	@Column(name = "DAT_LANCAMENTO")
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataLancamento;
 	
 	@Column(name="VLR_LANCAMENTO")
-	private Double valorLancamento;
+	private String valorLancamento;
 	
-	@Column(name="FRM_PAGAMENTO")
-	private Integer formaPagamento;
+	@Column(nullable = true, name="FRM_PAGAMENTO")
+	@Enumerated(EnumType.STRING)
+	private FormaPagamento formaPagamento;
 	
 	@Column(name="SIT_LANCAMENTO")
-	private Integer situacaoPagamento;
+	@Enumerated(EnumType.STRING)
+	private SituacaoPagamento situacaoPagamento;
 	
 	@Column(name="DAT_PAGAMENTO")
-	@JsonFormat(pattern="dd/MM/yyyy")
-	private Date dataPagamento;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate dataPagamento;
+	
+	@Column(name="PGTO_SINAL")
+	private Boolean pagamentoSinal;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -52,14 +68,14 @@ public class Lancamento implements Serializable {
 		
 	}
 
-	public Lancamento(Integer id, Date dataLancamento, Double valorLancamento, FormaPagamento formaPagamento,
-			SituacaoPagamento situacaoPagamento, Reserva reserva,Date dataPagamento) {
+	public Lancamento(Integer id, LocalDate dataLancamento, String valorLancamento, FormaPagamento formaPagamento,
+			SituacaoPagamento situacaoPagamento, Reserva reserva,LocalDate dataPagamento) {
 		
 		this.id = id;
 		this.dataLancamento = dataLancamento;
 		this.valorLancamento = valorLancamento;
-		this.formaPagamento = formaPagamento.getCodigo();
-		this.situacaoPagamento = situacaoPagamento.getCodigo();
+		this.formaPagamento = formaPagamento;
+		this.situacaoPagamento = situacaoPagamento;
 		this.reserva = reserva;
 		this.dataPagamento = dataPagamento;
 	}
@@ -72,43 +88,43 @@ public class Lancamento implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataLancamento() {
+	public LocalDate getDataLancamento() {
 		return dataLancamento;
 	}
 
-	public void setDataLancamento(Date dataLancamento) {
+	public void setDataLancamento(LocalDate dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
 
-	public Double getValorLancamento() {
+	public String getValorLancamento() {
 		return valorLancamento;
 	}
 
-	public void setValorLancamento(Double valorLancamento) {
+	public void setValorLancamento(String valorLancamento) {
 		this.valorLancamento = valorLancamento;
 	}
 
 	public FormaPagamento getFormaPagamento() {
-		return FormaPagamento.toEnum(formaPagamento);
+		return formaPagamento;
 	}
 
 	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento.getCodigo();
+		this.formaPagamento = formaPagamento;
 	}
 
 	public SituacaoPagamento getSituacaoPagamento() {
-		return SituacaoPagamento.toEnum(situacaoPagamento);
+		return situacaoPagamento;
 	}
 
 	public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
-		this.situacaoPagamento = situacaoPagamento.getCodigo();
+		this.situacaoPagamento = situacaoPagamento;
 	}
 
-	public Date getDataPagamento() {
+	public LocalDate getDataPagamento() {
 		return dataPagamento;
 	}
 
-	public void setDataPagamento(Date dataPagamento) {
+	public void setDataPagamento(LocalDate dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
 
@@ -120,6 +136,15 @@ public class Lancamento implements Serializable {
 		this.reserva = reserva;
 	}
 
+	public Boolean getPagamentoSinal() {
+		return pagamentoSinal;
+	}
+
+	public void setPagamentoSinal(Boolean pagamentoSinal) {
+		this.pagamentoSinal = pagamentoSinal;
+	}
+
+	
 	
 	
 	

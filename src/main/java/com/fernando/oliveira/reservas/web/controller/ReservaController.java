@@ -14,7 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.Viajante;
-import com.fernando.oliveira.reservas.domain.dto.ReservaDTO;
+import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
+import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 import com.fernando.oliveira.reservas.service.ReservaService;
 import com.fernando.oliveira.reservas.service.ViajanteService;
@@ -86,6 +87,22 @@ public class ReservaController {
 	public SituacaoReserva[] listaSituacoes() {
 		return SituacaoReserva.values();
 	}
+	
+	@PostMapping("/adicionarLancamento")
+	public String adicionarLancamento(Reserva reserva, RedirectAttributes attr) {
+//		reservaService.update(reserva);
+		attr.addFlashAttribute("success", "Reserva editada com sucesso.");
+		return "redirect:/reservas/cadastrar";
+	}
+	
+	@ModelAttribute("formasPagamento")
+	public FormaPagamento[] listaFormaPagamento() {
+		return FormaPagamento.values();
+	}
 
+	@ModelAttribute("situacoesPagamento")
+	public SituacaoPagamento[] listaSituacaoPagamento() {
+		return SituacaoPagamento.values();
+	}
 
 }

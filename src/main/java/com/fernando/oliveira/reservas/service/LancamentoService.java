@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fernando.oliveira.reservas.domain.Lancamento;
 import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.dto.LancamentoDTO;
+import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.repository.LancamentoRepository;
 
 @Service
@@ -27,12 +28,12 @@ public class LancamentoService {
 	@Transactional
 	public Lancamento insert(Lancamento lancamento) {
 		
-		Reserva reserva = reservaService.find(lancamento.getReserva().getId());
-		
-		if(reserva == null) {
-			lancamento.setReserva(reserva);
-		}
-		
+//		Reserva reserva = reservaService.find(lancamento.getReserva().getId());
+//		
+//		if(reserva == null) {
+//			lancamento.setReserva(reserva);
+//		}
+		lancamento.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
 		repository.save(lancamento);
 		
 		return lancamento;

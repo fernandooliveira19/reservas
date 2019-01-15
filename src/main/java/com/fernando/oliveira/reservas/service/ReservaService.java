@@ -23,6 +23,9 @@ public class ReservaService {
 	@Autowired
 	private ViajanteService viajanteService;
 	
+	@Autowired
+	private LancamentoService lancamentoService;
+	
 	
 	@Transactional
 	public Reserva insert(Reserva reserva) {
@@ -32,8 +35,24 @@ public class ReservaService {
 		if(viajante == null) {
 			return null;
 		}
-		
 		reserva.setViajante(viajante);
+		
+		if(!reserva.getLancamentos().isEmpty()) {
+			
+			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
+				Lancamento lancamento = reserva.getLancamentos().get(i);
+				
+				if(i == 0) {
+					lancamento.setPagamentoSinal(Boolean.TRUE);
+				}else {
+					lancamento.setPagamentoSinal(Boolean.FALSE);
+				}
+				
+				lancamento.setReserva(reserva);
+				lancamentoService.insert(lancamento);
+			}
+						
+		}
 
 		repository.save(reserva);
 		

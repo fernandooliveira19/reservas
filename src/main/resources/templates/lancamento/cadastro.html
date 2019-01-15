@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+	
+	    <section class="layout-content" layout:fragment="corpo">
+	
+	        <nav class="navbar navbar-expand-md bg-light">
+	            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item active">
+	                        <i class="oi oi-caret-right"></i>
+	                        <span>Cadastrar Lançamentos</span>
+	                    </li>
+	                </ul>
+	                <a class="btn btn-primary btn-md" th:href="@{/lancamentos/listar}" role="button">
+	                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span>
+	                    <span>Listar Lançamentos</span>
+	                </a>
+	            </div>
+	        </nav>
+	        
+	        <div class="container" id="cadastro">
+	            <form th:action="${lancamento.id == null} ? @{/lancamentos/salvar} : @{/lancamentos/editar}" 
+	            th:object="${lancamento}" method="POST">
+	            
+	        <div class="form-row">
+					
+						<div class="form-group col-md-4">
+	                        <label for="reserva">Reserva</label>
+	                       	<select id="reserva" class="form-control" th:field="*{reserva}" >
+	                       	<option value="">Selecione reserva...</option>
+	                       	<option th:each="r : ${reservas}" th:value="${r.id}" th:text="${r.viajante.nome}"></option>
+	                       	</select>
+	                       
+	                        <div class="invalid-feedback">
+	
+	                        </div>
+	                    </div>
+	
+	        </div>    
+	            
+	        <div id="card-672316">
+					<div class="card">
+						<div class="card-header">
+							<a class="card-link collapsed" data-toggle="collapse"
+								data-parent="#card-672316" href="#card-element-46316">1º
+								Pagamento</a>
+						</div>
+						<div id="card-element-46316" class="collapse">
+							<div class="card-body">
+
+								<div class="form-row">
+									<div class="form-group col-md-4">
+										<label for="valor">Valor</label> <input type="text"
+											class="form-control" id="valor" data-mask="#.##0,00"
+											data-mask-reverse="true" name="valor"
+											th:field="*{valorLancamento}" />
+										<div class="invalid-feedback"></div>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="valor">Data</label> <input type="date"
+											class="form-control" id="dataLancamento"
+											data-mask-reverse="true" name="valor"
+											th:field="*{dataLancamento}" />
+										<div class="invalid-feedback"></div>
+									</div>
+									<div class="form-group col-md-4">
+										<label for="formaPagamento">Forma Pagamento</label> <select
+											id="formaPagamento" class="form-control"
+											th:field="*{formaPagamento}">
+											<option value="">Selecione...</option>
+											<option th:each="f : ${formasPagamento}" th:value="${f}"
+												th:text="${f.descricao}"></option>
+										</select>
+										<div class="invalid-feedback"></div>
+
+									</div>
+
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="card">
+					<div class="card-header">
+						 <a class="card-link collapsed" data-toggle="collapse" data-parent="#card-672316" href="#card-element-707919">2º Pagamento</a>
+					</div>
+					<div id="card-element-707919" class="collapse">
+						<div class="card-body">
+							<div class="form-row">
+	                	<div class="form-group col-md-4">
+	                        <label for="valor">Valor</label>
+	                        <input type="text" class="form-control" id="valor" data-mask="#.##0,00"
+	                               data-mask-reverse="true" name="valor" th:field="*{valorLancamento}"/>
+	                        <div class="invalid-feedback">
+	
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-4">
+	                        <label for="valor">Data</label>
+	                        <input type="date" class="form-control" id="dataLancamento" 
+	                               data-mask-reverse="true" name="valor" th:field="*{dataLancamento}"/>
+	                        <div class="invalid-feedback">
+	
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-4">
+	                		<label for="formaPagamento">Forma Pagamento</label>
+	                		<select id="formaPagamento" class="form-control" th:field="*{formaPagamento}" >
+	                       	<option value="">Selecione...</option>
+	                       	<option th:each="f : ${formasPagamento}" th:value="${f}" th:text="${f.descricao}"></option>
+	                       	</select>
+	                        <div class="invalid-feedback"></div>
+	                	
+	                	</div>
+	                
+	                
+	                </div>
+						</div>
+					</div>
+				</div>
+			</div>
+	        
+	        
+	        
+	
+	        
+	                
+	                	                
+	                
+	                <input type="hidden" id="id" name="id" value=""/>
+	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+	            </form>
+	        </div>
+	    </section>
+</body>
+</html>

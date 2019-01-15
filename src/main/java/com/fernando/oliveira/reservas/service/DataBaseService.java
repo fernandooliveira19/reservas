@@ -2,17 +2,17 @@ package com.fernando.oliveira.reservas.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fernando.oliveira.reservas.domain.Lancamento;
 import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.Telefone;
 import com.fernando.oliveira.reservas.domain.Viajante;
-import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
-import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 import com.fernando.oliveira.reservas.domain.enums.TipoTelefone;
 
@@ -46,11 +46,12 @@ public class DataBaseService {
 		bruno.setTelefone(foneBruno);
 		viajanteService.insert(bruno);
 		
-		
-		
+		LocalDateTime dataEntrada = LocalDateTime.of(2019,Month.JANUARY,1,10,0,0); 
+		LocalDateTime dataSaida = LocalDateTime.of(2019,Month.JANUARY,10,18,0,0); 
 		
 		//cria uma reserva
-//		Reserva reservaBruno = new Reserva(null,"", sdf.parse("28/12/2017 18:00"),sdf.parse("03/01/2018 20:00"),SituacaoReserva.RESERVADO,bruno, 3600.00, null);
+//		Reserva reservaBruno = new Reserva
+//				(null,dataEntrada,dataSaida,SituacaoReserva.RESERVADO,bruno, "3600.00", null);
 //		reservaService.insert(reservaBruno);
 		
 		//cria um valorReserva e atribui ao uma reserva

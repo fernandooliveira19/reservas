@@ -74,11 +74,10 @@ public class Reserva implements Serializable {
 
 	}
 
-	public Reserva(Integer id, String codigo, LocalDateTime dataEntrada, LocalDateTime dataSaida, SituacaoReserva situacaoReserva,
+	public Reserva(Integer id, LocalDateTime dataEntrada, LocalDateTime dataSaida, SituacaoReserva situacaoReserva,
 			Viajante viajante, String valorTotal, Contrato contrato) {
 		
 		this.id = id;
-		this.codigo = codigo;
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.situacaoReserva = situacaoReserva;

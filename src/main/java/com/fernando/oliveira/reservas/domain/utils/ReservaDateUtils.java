@@ -3,6 +3,7 @@ package com.fernando.oliveira.reservas.domain.utils;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DecimalStyle;
 import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.Locale;
@@ -31,7 +32,7 @@ public class ReservaDateUtils {
 	public static String formatarDataLocal(LocalDateTime data) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter
-		  .ofLocalizedDateTime(FormatStyle.SHORT)
+		  .ofLocalizedDateTime(FormatStyle.MEDIUM)
 		  .withLocale(new Locale("pt", "br"));
 		return data.format(formatter);
 		

@@ -2,21 +2,21 @@ package com.fernando.oliveira.reservas.domain.enums;
 
 public enum FormaPagamento {
 	
-	TRANSFERENCIA(1,"Transferencia"),
-	DEPOSITO(2,"Depósito"),
-	SITE(3,"Site"),
-	LOCAL(4,"Local");
+	TRANSFERENCIA("T","Transferencia"),
+	DEPOSITO("D","Depósito"),
+	SITE("S","Site"),
+	LOCAL("L","Local");
 	
-	private Integer codigo;
+	private String codigo;
 	private String descricao;
 	
-	FormaPagamento(Integer codigo, String descricao) {
+	FormaPagamento(String codigo, String descricao) {
 	
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
 
-	public Integer getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
@@ -24,7 +24,7 @@ public enum FormaPagamento {
 		return descricao;
 	}
 	
-    public static FormaPagamento toEnum(Integer codigo) {
+    public static FormaPagamento toEnum(String codigo) {
 		
 		if(codigo == null){
 			return null;
