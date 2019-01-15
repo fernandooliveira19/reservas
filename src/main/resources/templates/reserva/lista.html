@@ -101,7 +101,8 @@
 	                        <th>Check in</th>
 	                        <th>Check out</th>
 	                        <th>Viajante</th>
-	                        <th>Valor</th>
+	                        <th>Valor Total</th>
+	                        <th>Valor Pendente</th>
 	                        <th>Pagamento</th>
 	                        <th>Situação</th>
 	                        <th>Ação</th>
@@ -113,6 +114,7 @@
 	                        <td th:text="${r.dataSaidaFormatada}">03/01/2019 19:00</td>
 	                        <td th:text="${r.viajante.nome}">Bruno Maretta</td>
 	                        <td th:text="${r.valorTotal}">R$ 3.500,00</td>
+	                        <td th:text="${r.valorPendente}">R$ 3.500,00</td>
 	                        <td th:text="${r.situacaoPagamento}">Quitado</td>
 	                        <td th:text="${r.situacaoReserva}">Reservado</td>
 	                       

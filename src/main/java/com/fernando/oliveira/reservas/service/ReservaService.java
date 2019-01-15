@@ -1,5 +1,6 @@
 package com.fernando.oliveira.reservas.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,8 @@ public class ReservaService {
 		}
 		reserva.setViajante(viajante);
 		
+		BigDecimal valorPago = new BigDecimal(0);
+		
 		if(!reserva.getLancamentos().isEmpty()) {
 			
 			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
@@ -48,15 +51,34 @@ public class ReservaService {
 					lancamento.setPagamentoSinal(Boolean.FALSE);
 				}
 				
+				if(lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
+					valorPago = valorPago.add(lancamento.getValorLancamento());
+				}
+				
+				
+				
+				
 				lancamento.setReserva(reserva);
 				lancamentoService.insert(lancamento);
 			}
 						
 		}
+		
+		definirStatusReserva(reserva, valorPago);
+		
+		definirValorPendente(reserva, valorPago);
 
 		repository.save(reserva);
 		
 		return reserva;
+	}
+
+	private void definirStatusReserva(Reserva reserva, BigDecimal valorPago) {
+		if(valorPago.intValue() >= reserva.getValorTotal().intValue()) {
+			reserva.setSituacaoPagamento(SituacaoPagamento.PAGO);
+		}else {
+			reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
+		}
 	}
 
 //	public Reserva fromDTO(@Valid ReservaDTO dto) {
@@ -67,15 +89,61 @@ public class ReservaService {
 //		return viajante;
 //	}
 
-	public Reserva update(Reserva obj) {
-		Reserva newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repository.save(newObj);
+	public Reserva update(Reserva reserva) {
+		
+		calcularPagamentoReserva(reserva);
+		
+		return repository.save(reserva);
+	}
+
+	private void calcularPagamentoReserva(Reserva reserva) {
+		BigDecimal valorPago = new BigDecimal(0);
+		
+		if(!reserva.getLancamentos().isEmpty()) {
+			
+			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
+				
+				Lancamento lancamento = lancamentoService.find(reserva.getLancamentos().get(i).getId());
+				
+				lancamento.setDataLancamento(reserva.getLancamentos().get(i).getDataLancamento());
+				lancamento.setDataPagamento(reserva.getLancamentos().get(i).getDataPagamento());
+				lancamento.setFormaPagamento(reserva.getLancamentos().get(i).getFormaPagamento());
+				lancamento.setSituacaoPagamento(reserva.getLancamentos().get(i).getSituacaoPagamento());
+				lancamento.setValorLancamento(reserva.getLancamentos().get(i).getValorLancamento());
+				
+				if(i == 0) {
+					lancamento.setPagamentoSinal(Boolean.TRUE);
+				}else {
+					lancamento.setPagamentoSinal(Boolean.FALSE);
+				}
+				
+				
+				
+				
+				if(lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
+					valorPago = valorPago.add(lancamento.getValorLancamento());
+				}
+				
+				
+				definirValorPendente(reserva, valorPago);
+				
+				
+				lancamento.setReserva(reserva);
+				lancamentoService.update(lancamento);
+			}
+			
+		}
+		
+		
+		definirStatusReserva(reserva, valorPago);
+	}
+
+	private void definirValorPendente(Reserva reserva, BigDecimal valorPago) {
+		BigDecimal valorPendente = reserva.getValorTotal().subtract(valorPago);
+		reserva.setValorPendente(valorPendente);
 	}
 	
-	private void updateData(Reserva newObj, Reserva obj) {
-		
-	}
+	
 	
 	public Reserva find(Integer id) {
 		
@@ -87,30 +155,30 @@ public class ReservaService {
 	public List<Reserva> findAll() {
 		List<Reserva> lista = repository.findAll();
 		
-		for(Reserva reserva : lista) {
-			
-			if(reserva.getLancamentos() != null
-					&& reserva.getLancamentos().isEmpty()) {
-				reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
-				continue;
-			}else {
-				
-				for(Lancamento lancamento : reserva.getLancamentos()) {
-					
-					if(lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
-						
-						reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
-						break;
-					}
-					
-					reserva.setSituacaoPagamento(SituacaoPagamento.PAGO);
-				}
-				
-			}
-			
-			
-			
-		}
+//		for(Reserva reserva : lista) {
+//			
+//			if(reserva.getLancamentos() != null
+//					&& reserva.getLancamentos().isEmpty()) {
+//				reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
+//				continue;
+//			}else {
+//				
+//				for(Lancamento lancamento : reserva.getLancamentos()) {
+//					
+//					if(lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
+//						
+//						reserva.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
+//						break;
+//					}
+//					
+//					reserva.setSituacaoPagamento(SituacaoPagamento.PAGO);
+//				}
+//				
+//			}
+//			
+//			
+//			
+//		}
 		
 		return lista;
 	}

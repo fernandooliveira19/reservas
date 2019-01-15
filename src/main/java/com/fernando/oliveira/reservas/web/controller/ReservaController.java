@@ -44,7 +44,7 @@ public class ReservaController {
 	
 	@PostMapping("/salvar")
 	public String salvar(Reserva reserva, RedirectAttributes attr) {
-//		Reserva reserva = new Reserva(dto); 
+
 		reservaService.insert(reserva);
 		
 		attr.addFlashAttribute("success", "Reserva inserida com sucesso");

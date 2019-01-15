@@ -72,6 +72,10 @@ public class Reserva implements Serializable {
 	@OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL)
 	private Contrato contrato;
 	
+	@NumberFormat(style=Style.CURRENCY, pattern="#,##0.00")
+	@Column(name = "VLR_PENDENTE", nullable = false, columnDefinition="DECIMAL(7,2) DEFAULT 0.00")
+	private BigDecimal valorPendente;
+	
 	
 	public Reserva() {
 
@@ -179,6 +183,17 @@ public class Reserva implements Serializable {
 
 	public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
 		this.situacaoPagamento = situacaoPagamento;
+	}
+	
+	
+	
+
+	public BigDecimal getValorPendente() {
+		return valorPendente;
+	}
+
+	public void setValorPendente(BigDecimal valorPendente) {
+		this.valorPendente = valorPendente;
 	}
 
 	public String getDataEntradaFormatada() {

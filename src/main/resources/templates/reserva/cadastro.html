@@ -104,8 +104,8 @@
 
 								<div class="form-row">
 									<div class="form-group col-md-2">
-										<label for="valor">Valor</label> <input type="text"
-											class="form-control" id="valor" data-mask="#.##0,00"
+										<label for="valorLancamento0">Valor</label> <input type="text"
+											class="form-control" id="valorLancamento0" data-mask="#.##0,00"
 											data-mask-reverse="true" name="valor"
 											th:field="*{lancamentos[0].valorLancamento}" />
 										<div class="invalid-feedback"></div>
@@ -213,6 +213,9 @@
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" />
+				<input type="hidden" id="lancamento0.id" th:field="*{lancamentos[0].id}" />
+				<input type="hidden" id="lancamento1.id" th:field="*{lancamentos[1].id}" />
+				
 				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 				<div>
 				
