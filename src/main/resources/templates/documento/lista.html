@@ -102,9 +102,9 @@
 	                        <th>Check out</th>
 	                        <th>Viajante</th>
 	                        <th>Valor Total</th>
-	                        <th>Valor Pendente</th>
 	                        <th>Pagamento</th>
-	                        <th>Situação</th>
+	                        <th>Contrato</th>
+	                        <th>Autorização</th>
 	                        <th>Ação</th>
 	                    </tr>
 	                    </thead>
@@ -114,19 +114,19 @@
 	                        <td th:text="${r.dataSaidaFormatada}">03/01/2019 19:00</td>
 	                        <td th:text="${r.viajante.nome}">Bruno Maretta</td>
 	                        <td th:text="${r.valorTotal}">R$ 3.500,00</td>
-	                        <td th:text="${r.valorPendente}">R$ 3.500,00</td>
 	                        <td th:text="${r.situacaoPagamento}">Quitado</td>
-	                        <td th:text="${r.situacaoReserva}">Reservado</td>
-	                       
+	                        <td >ENVIADO</td>
+	                        <td >NÃO ENVIADO</td>
+	                        
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" 
 	                            th:href="@{/reservas/editar/{id} (id=${r.id})}" role="button">
 	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
 	                            </a>
-	                            <a class="btn btn-info btn-sm" 
-	                            th:href="@{/reservas/contrato/{id} (id=${r.id})}" role="button">
-	                                <span class="oi oi-brush" title="Gerar Contrato" aria-hidden="true"></span>
-	                            </a>
+	                            <button id="btn_funcionarios/excluir/1" type="button" class="btn btn-danger btn-sm"
+	                                    data-toggle="modal" data-target="#myModal">
+	                                <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
+	                            </button>
 	                        </td>
 	                    </tr>
 	                    

@@ -15,7 +15,7 @@ public class ReservaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private String codigo;
+	
 //	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private LocalDateTime dataEntrada;
 //	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
@@ -33,7 +33,7 @@ public class ReservaDTO implements Serializable {
 			BigDecimal valorTotal, Viajante viajante, Contrato contrato) {
 		
 		this.id = id;
-		this.codigo = codigo;
+		
 		this.dataEntrada = dataEntrada;
 		this.dataSaida = dataSaida;
 		this.situacaoReserva = situacaoReserva;
@@ -43,7 +43,7 @@ public class ReservaDTO implements Serializable {
 	}
 	public ReservaDTO(Reserva obj) {
 		this.id = obj.getId();
-		this.codigo = obj.getCodigo();
+		
 //		this.dataEntrada = DateUtils.parseDateToString(obj.getDataEntrada());
 		this.dataEntrada = obj.getDataEntrada();
 		this.dataSaida = obj.getDataSaida();
@@ -58,12 +58,7 @@ public class ReservaDTO implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+	
 	public LocalDateTime getDataEntrada() {
 		return dataEntrada;
 	}

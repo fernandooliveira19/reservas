@@ -16,7 +16,7 @@ import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.repository.ReservaRepository;
 
 @Service
-public class ReservaService {
+public class DocumentoService {
 	
 	@Autowired
 	private ReservaRepository repository;
@@ -29,7 +29,7 @@ public class ReservaService {
 	
 	
 	@Transactional
-	public Reserva insert(Reserva reserva) {
+	public Reserva enviarContrato(Reserva reserva) {
 		
 		Viajante viajante = viajanteService.find(reserva.getViajante().getId());
 		
@@ -38,34 +38,7 @@ public class ReservaService {
 		}
 		reserva.setViajante(viajante);
 		
-		BigDecimal valorPago = new BigDecimal(0);
-		
-		if(!reserva.getLancamentos().isEmpty()) {
-			
-			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
-				Lancamento lancamento = reserva.getLancamentos().get(i);
 				
-				atribuirPagamentoSinal(i, lancamento);
-				
-				if(lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
-					valorPago = valorPago.add(lancamento.getValorLancamento());
-				}
-				
-				
-				
-				
-				lancamento.setReserva(reserva);
-				lancamentoService.insert(lancamento);
-			}
-						
-		}
-		
-		definirStatusReserva(reserva, valorPago);
-		
-		definirValorPendente(reserva, valorPago);
-
-		repository.save(reserva);
-		
 		return reserva;
 	}
 
@@ -182,7 +155,5 @@ public class ReservaService {
 		
 		return lista;
 	}
-	
-
 
 }

@@ -24,13 +24,13 @@ import com.fernando.oliveira.reservas.domain.Viajante;
 import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
-import com.fernando.oliveira.reservas.service.ContratoService;
+import com.fernando.oliveira.reservas.service.PdfReportService;
 import com.fernando.oliveira.reservas.service.ReservaService;
 import com.fernando.oliveira.reservas.service.ViajanteService;
 
 @Controller
-@RequestMapping("/reservas")
-public class ReservaController {
+@RequestMapping("/documentos")
+public class DocumentoController {
 	
 	@Autowired
 	private ReservaService reservaService;
@@ -39,7 +39,7 @@ public class ReservaController {
 	private ViajanteService viajanteService;
 	
 	@Autowired
-	private ContratoService contratoService;
+	private PdfReportService pdfReportService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Reserva reserva) {
@@ -50,7 +50,7 @@ public class ReservaController {
 	public String listar(ModelMap model) {
 		List<Reserva> reservas = reservaService.findAll();
 		model.addAttribute("reservas", reservas);
-		return "/reserva/lista";
+		return "/documento/lista";
 	}
 	
 	@PostMapping("/salvar")
@@ -116,32 +116,25 @@ public class ReservaController {
 		return SituacaoPagamento.values();
 	}
 	
-	@RequestMapping(value = "/contrato/{id}", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_PDF_VALUE)
-    public ResponseEntity<InputStreamResource> gerarContrato(@PathVariable("id") Integer id) throws IOException {
-
-       Reserva reserva = reservaService.find(id);
-
-        ByteArrayInputStream bis = contratoService.gerarContrato(reserva);
-
-        HttpHeaders headers = new HttpHeaders();
-        String nomeContrato = atribuirNomeContrato(reserva);
-        headers.add("Content-Disposition", "inline; filename=" + nomeContrato +".pdf");
-
-        return ResponseEntity
-                .ok()
-                .headers(headers)
-                .contentType(MediaType.APPLICATION_PDF)
-                .body(new InputStreamResource(bis));
-    }
+//	@RequestMapping(value = "/contrato", method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_PDF_VALUE)
+//    public ResponseEntity<InputStreamResource> gerarContrato(Reserva reserva) throws IOException {
+//
+//       
+//
+//        ByteArrayInputStream bis = pdfReportService.gerarContrato(reserva);
+//
+//        HttpHeaders headers = new HttpHeaders();
+//        String nomeContrato = atribuirNomeContrato(reserva);
+//        headers.add("Content-Disposition", "inline; filename=" + nomeContrato +".pdf");
+//
+//        return ResponseEntity
+//                .ok()
+//                .headers(headers)
+//                .contentType(MediaType.APPLICATION_PDF)
+//                .body(new InputStreamResource(bis));
+//    }
 	
-	private String atribuirNomeContrato(Reserva reserva) {
-		String data = reserva.getDataEntrada().toString();
-		String viajante = reserva.getViajante().getNome().replaceAll(" ", "");
-		
-		return "contrato_"+data + "_" + viajante;
-		
-	}
-
+	
 
 }

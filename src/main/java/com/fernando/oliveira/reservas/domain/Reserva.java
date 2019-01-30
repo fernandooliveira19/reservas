@@ -23,8 +23,10 @@ import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
+import com.fernando.oliveira.reservas.domain.enums.TipoReserva;
 import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
 
 @Entity
@@ -36,9 +38,7 @@ public class Reserva implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "CODIGO")
-	private String codigo;
-
+	
 	@Column(name = "DATA_ENTRADA")
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -76,6 +76,10 @@ public class Reserva implements Serializable {
 	@Column(name = "VLR_PENDENTE", nullable = false, columnDefinition="DECIMAL(7,2) DEFAULT 0.00")
 	private BigDecimal valorPendente;
 	
+//	@Column(nullable = true, name="TIP_RESERVA")
+//	@Enumerated(EnumType.STRING)
+//	private TipoReserva tipoReserva;
+	
 	
 	public Reserva() {
 
@@ -92,17 +96,7 @@ public class Reserva implements Serializable {
 		this.valorTotal = valorTotal;
 		this.contrato = contrato;
 	}
-	
-//	public Reserva (ReservaDTO dto) {
-//		this.id = dto.getId();
-//		this.codigo = dto.getCodigo();
-////		this.dataEntrada = DateUtils.parseStringToDate(dto.getDataEntrada(),"");
-////		this.dataSaida = dto.getDataSaida();
-//		this.situacaoReserva = dto.getSituacaoReserva();
-//		this.valorTotal = dto.getValorTotal();
-//		this.viajante = dto.getViajante();
-//		this.contrato = dto.getContrato();
-//	}
+
 
 	public Integer getId() {
 		return id;
@@ -110,14 +104,6 @@ public class Reserva implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	public LocalDateTime getDataEntrada() {
