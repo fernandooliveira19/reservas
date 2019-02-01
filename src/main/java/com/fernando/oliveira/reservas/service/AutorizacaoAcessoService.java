@@ -140,6 +140,7 @@ public class AutorizacaoAcessoService {
 	private Element getSubTitulo(String titulo) {
 		Paragraph paragraph = new Paragraph(titulo,
 				new Font(FontFamily.HELVETICA, 14, Font.BOLD, new BaseColor(0, 0, 0)));
+		paragraph.setAlignment(Element.ALIGN_CENTER);
 		return paragraph;
 	}
 
@@ -212,7 +213,7 @@ public class AutorizacaoAcessoService {
 			
 
 			
-			for(int i = 1; i < 11; i++) {
+			for(int i = 1; i < 9; i++) {
 				
 				PdfPCell cell;
 
