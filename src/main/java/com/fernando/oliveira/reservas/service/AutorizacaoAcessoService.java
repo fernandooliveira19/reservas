@@ -189,7 +189,7 @@ public class AutorizacaoAcessoService {
 			PdfPTable table = new PdfPTable(4);
 			table.setWidthPercentage(100);
 
-			table.setWidths(new int[] { 1, 3, 3, 3 });
+			table.setWidths(new int[] { 1, 4, 1, 2 });
 
 			Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
