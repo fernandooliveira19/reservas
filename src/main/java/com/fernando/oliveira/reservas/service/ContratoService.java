@@ -3,32 +3,20 @@ package com.fernando.oliveira.reservas.service;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
 import java.net.MalformedURLException;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.text.NumberFormatter;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.fernando.oliveira.reservas.domain.Lancamento;
 import com.fernando.oliveira.reservas.domain.Reserva;
-import com.fernando.oliveira.reservas.domain.Viajante;
 import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
-import com.fernando.oliveira.reservas.repository.ViajanteRepository;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -45,18 +33,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class ContratoService {
 
-	@Autowired
-	private ViajanteRepository repository;
-
-	@Transactional
-	public Viajante insert(Viajante entity) {
-
-		entity.setDataInclusao(new Date());
-		repository.save(entity);
-
-		return entity;
-	}
-
+	
 	private static final String LINHA = "\n";
 
 	public ByteArrayInputStream gerarContrato(Reserva reserva) {
@@ -66,10 +43,7 @@ public class ContratoService {
 
 		try {
 
-			Paragraph titulo = new Paragraph("CONTRATO DE LOCAÇÃO POR TEMPORADA");
-			titulo.setAlignment(Element.ALIGN_CENTER);
-			titulo.add("\n\n");
-
+			
 			PdfWriter.getInstance(document, out);
 			document.open();
 			document.add(getTitulo("CONTRATO DE LOCAÇÃO POR TEMPORADA"));
@@ -157,13 +131,19 @@ public class ContratoService {
 				+ "de entrada, 3 elevadores, serviço de praia com cadeiras e 2 guarda-sóis (a "
 				+ "solicitar na recepção).");
 		paragraph.add(LINHA);
-		paragraph.add("Observações:");
 		paragraph.add(LINHA);
-		paragraph.add("É necessário levar roupa de cama, mesa e banho");
+		Paragraph observacao = new Paragraph("Observações:",
+				new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(0, 0, 0)));
+		paragraph.add(observacao);
+		
+		Font zapfdingbats = new Font();
+		Chunk bullet = new Chunk("\u2022", zapfdingbats);
 		paragraph.add(LINHA);
-		paragraph.add("É recomendável levar travesseiros");
+		paragraph.add(bullet + "  É necessário levar roupa de cama, mesa e banho");
 		paragraph.add(LINHA);
-		paragraph.add("NÃO possui garagem, mas há vagas nas ruas próximas e " + "estacionamentos");
+		paragraph.add(bullet + "  É recomendável levar travesseiros");
+		paragraph.add(LINHA);
+		paragraph.add(bullet + "  NÃO possui garagem, mas há vagas nas ruas próximas e " + "estacionamentos");
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 
@@ -172,27 +152,30 @@ public class ContratoService {
 
 	private Element getRegulamentoInterno() {
 		Paragraph paragraph = new Paragraph();
+		
+		Font zapfdingbats = new Font();
+	    Chunk bullet = new Chunk("\u2022", zapfdingbats);
+	    
 		paragraph.add(LINHA);
-		paragraph.add("O imóvel pode acomodar no máximo 8 pessoas. Sendo que crianças até " + "5 anos não contam.");
+		paragraph.add(bullet + "  O imóvel pode acomodar no máximo 8 pessoas. Sendo que crianças até " + "5 anos não contam.");
 		paragraph.add(LINHA);
-		paragraph.add("Banhistas devem entrar e sair pela porta lateral e usar o elevador "
+		paragraph.add(bullet + "  Banhistas devem entrar e sair pela porta lateral e usar o elevador "
 				+ "reservado para banhistas, sem areia no corpo");
 		paragraph.add(LINHA);
-		paragraph.add(
-				"Estacionamento é reservado para embarque e desembarque de " + "bagagem e é limitado a 15 minutos");
+		paragraph.add(bullet + "  Estacionamento é reservado para embarque e desembarque de " + "bagagem e é limitado a 15 minutos");
 		paragraph.add(LINHA);
-		paragraph.add("Animais devem ser levados no colo e/ou com coleira. Não será tolerada "
+		paragraph.add(bullet + "  Animais devem ser levados no colo e/ou com coleira. Não será tolerada "
 				+ "sujeira produzida por animais em áreas comuns");
 		paragraph.add(LINHA);
-		paragraph.add("Latidos, gritos, e abusos com aparelhos sonoros, que incomodem os "
+		paragraph.add(bullet + "  Latidos, gritos, e abusos com aparelhos sonoros, que incomodem os "
 				+ "demais condôminos, não serão tolerados em horário nenhum");
 		paragraph.add(LINHA);
-		paragraph.add("É vetado pendurar roupas ou quaisquer outros objetos nas janelas");
+		paragraph.add(bullet + "  É vetado pendurar roupas ou quaisquer outros objetos nas janelas");
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
-		paragraph.add(LINHA);
+		
 
 		return paragraph;
 	}
@@ -239,6 +222,7 @@ public class ContratoService {
 		paragraph.add(LINHA);
 		String textoSinal = atribuirTextoPagamentoSinal(reserva);
 		paragraph.add(textoSinal);
+		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 		
 		String textoPagamentoRestante = atribuirTextoRestantePagamento(reserva);
@@ -294,9 +278,9 @@ public class ContratoService {
 
 			if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
 
-				if (lancamento.getDataLancamento().equals(reserva.getDataEntrada())
+				if (!ReservaDateUtils.isLancamentoAntesCheckIn(lancamento.getDataLancamento(),reserva.getDataEntrada())
 						&& lancamento.getFormaPagamento().equals(FormaPagamento.LOCAL)) {
-					texto.append("o restante de ");
+					texto.append("O restante de ");
 					texto.append(ReservaDateUtils.formatarValorMonetario(lancamento.getValorLancamento()));
 					texto.append(" será pago na recepção ao ingressar no imóvel.");
 					
@@ -315,6 +299,8 @@ public class ContratoService {
 		
 		return texto.toString();
 	}
+
+	
 
 	private Element getCancelamentoLocacao() {
 		Paragraph paragraph = new Paragraph();

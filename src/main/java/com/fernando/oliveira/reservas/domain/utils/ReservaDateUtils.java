@@ -7,6 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
@@ -68,5 +70,22 @@ public class ReservaDateUtils {
 		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
 		
 		return nf.format(valor);
+	}
+
+	public static boolean isLancamentoAntesCheckIn(LocalDate dataLancamento, LocalDateTime dataEntrada) {
+		
+		Date lancamento = converterLocalDate(dataLancamento);
+		Date entrada = converterLocalDateTime(dataEntrada);
+		
+		
+		return lancamento.before(entrada);
+	}
+	
+	public static Date converterLocalDate(LocalDate localDate) {
+		return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	}
+	
+	public static Date converterLocalDateTime(LocalDateTime localDateTime) {
+		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
 	}
 }
