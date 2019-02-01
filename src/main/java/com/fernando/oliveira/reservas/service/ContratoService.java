@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fernando.oliveira.reservas.domain.Lancamento;
 import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.Viajante;
+import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
 import com.fernando.oliveira.reservas.repository.ViajanteRepository;
@@ -293,7 +294,8 @@ public class ContratoService {
 
 			if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
 
-				if (lancamento.getDataLancamento().equals(reserva.getDataEntrada())) {
+				if (lancamento.getDataLancamento().equals(reserva.getDataEntrada())
+						&& lancamento.getFormaPagamento().equals(FormaPagamento.LOCAL)) {
 					texto.append("o restante de ");
 					texto.append(ReservaDateUtils.formatarValorMonetario(lancamento.getValorLancamento()));
 					texto.append(" será pago na recepção ao ingressar no imóvel.");
@@ -301,8 +303,9 @@ public class ContratoService {
 				} else {
 					texto.append("o restante de ");
 					texto.append(ReservaDateUtils.formatarValorMonetario(lancamento.getValorLancamento()));
-					texto.append(" pago até o dia ");
+					texto.append(" será pago até o dia ");
 					texto.append(ReservaDateUtils.formatarDataLocal(lancamento.getDataLancamento()));
+					
 				}
 			}
 

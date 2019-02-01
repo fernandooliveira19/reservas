@@ -24,6 +24,7 @@ import com.fernando.oliveira.reservas.domain.Viajante;
 import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
+import com.fernando.oliveira.reservas.service.AutorizacaoAcessoService;
 import com.fernando.oliveira.reservas.service.ContratoService;
 import com.fernando.oliveira.reservas.service.ReservaService;
 import com.fernando.oliveira.reservas.service.ViajanteService;
@@ -40,6 +41,9 @@ public class ReservaController {
 	
 	@Autowired
 	private ContratoService contratoService;
+	
+	@Autowired
+	private AutorizacaoAcessoService autorizacaoAcessoService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Reserva reserva) {
@@ -140,6 +144,33 @@ public class ReservaController {
 		String viajante = reserva.getViajante().getNome().replaceAll(" ", "");
 		
 		return "contrato_"+data + "_" + viajante;
+		
+	}
+	
+	@RequestMapping(value = "/autorizacao/{id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> gerarAutorizacao(@PathVariable("id") Integer id) throws IOException {
+
+       Reserva reserva = reservaService.find(id);
+
+        ByteArrayInputStream bis = autorizacaoAcessoService.gerarAutorizacao(reserva);
+
+        HttpHeaders headers = new HttpHeaders();
+        String nomeArquivo = atribuirNomeAutorizacao(reserva);
+        headers.add("Content-Disposition", "inline; filename=" + nomeArquivo +".pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
+    }
+	
+	private String atribuirNomeAutorizacao(Reserva reserva) {
+		String data = reserva.getDataEntrada().toString();
+		String viajante = reserva.getViajante().getNome().replaceAll(" ", "");
+		
+		return "autorizacao_"+data + "_" + viajante;
 		
 	}
 

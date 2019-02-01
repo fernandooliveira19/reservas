@@ -6,12 +6,12 @@
 
 
 <script type="text/javascript">
-	jQuery(document).ready(function(){
-		$("#formaPagamento0").change(function(){
-		var x = $("#formaPagamento0").val();
-		alert(x);
-	});
-	});
+	
+	function preencherValorLancamento(){
+		
+		alert('1'); 
+			
+	}
 </script>
 
 
@@ -55,8 +55,8 @@
 					</div>
 					<div class="form-group col-md-4">
 						<label for="valor">Valor Total</label> <input type="text"
-							class="form-control" id="valor" data-mask="#.##0,00"
-							data-mask-reverse="true" name="valor" th:field="*{valorTotal}" />
+							class="form-control" id="valorTotal" data-mask="#.##0,00"
+							data-mask-reverse="true" name="valorTotal"  th:field="*{valorTotal}" />
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
@@ -96,25 +96,26 @@
 					<div class="card">
 						<div class="card-header">
 							<a class="card-link collapsed" data-toggle="collapse"
-								data-parent="#card-672316" href="#card-element-46316">1º
+								data-parent="#card-672316" href="#element-lancamento-01">1º
 								Pagamento</a>
 						</div>
-						<div id="card-element-46316" class="collapse">
+						<div id="element-lancamento-01" class="collapse">
 							<div class="card-body">
 
 								<div class="form-row">
 									<div class="form-group col-md-2">
 										<label for="valorLancamento0">Valor</label> <input type="text"
 											class="form-control" id="valorLancamento0" data-mask="#.##0,00"
-											data-mask-reverse="true" name="valor"
-											th:field="*{lancamentos[0].valorLancamento}" />
+											data-mask-reverse="true" name="valorLancamento0"
+											th:field="*{lancamentos[0].valorLancamento}"
+											onkeydown="preencherValorLancamento();"  />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
 										<label for="dataLancamento">Data Agendamento</label> <input type="date"
 											class="form-control" id="dataLancamento"
 											data-mask-reverse="true" name="valor"
-											th:field="*{lancamentos[0].dataLancamento}" />
+											th:field="*{lancamentos[0].dataLancamento}" onclick="preencherValorLancamento();"/>
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-2">
@@ -156,15 +157,15 @@
 					<div class="card">
 						<div class="card-header">
 							<a class="card-link collapsed" data-toggle="collapse"
-								data-parent="#card-672316" href="#card-element-707919">2º Pagamento</a>
+								data-parent="#card-672316" href="#element-lancamento-02">2º Pagamento</a>
 						</div>
-						<div id="card-element-707919" class="collapse">
+						<div id="element-lancamento-02" class="collapse" onload="preencherValorLancamento();">
 							<div class="card-body">
 								<div class="form-row">
 									<div class="form-group col-md-2">
 										<label for="valor">Valor</label> <input type="text"
-											class="form-control" id="valor" data-mask="#.##0,00"
-											data-mask-reverse="true" name="valor"
+											class="form-control" id="valorLancamento02" data-mask="#.##0,00"
+											data-mask-reverse="true" name="valorLancamento02"
 											th:field="*{lancamentos[1].valorLancamento}" />
 										<div class="invalid-feedback"></div>
 									</div>

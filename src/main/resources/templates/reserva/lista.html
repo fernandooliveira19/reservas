@@ -121,11 +121,15 @@
 	                        <td colspan="2">
 	                            <a class="btn btn-info btn-sm" 
 	                            th:href="@{/reservas/editar/{id} (id=${r.id})}" role="button">
-	                                <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+	                                <span class="oi oi-cog" title="Editar" aria-hidden="true"></span>
 	                            </a>
 	                            <a class="btn btn-info btn-sm" 
 	                            th:href="@{/reservas/contrato/{id} (id=${r.id})}" role="button">
-	                                <span class="oi oi-brush" title="Gerar Contrato" aria-hidden="true"></span>
+	                                <span class="oi oi-file" title="Gerar Contrato" aria-hidden="true"></span>
+	                            </a>
+	                            <a class="btn btn-info btn-sm" 
+	                            th:href="@{/reservas/autorizacao/{id} (id=${r.id})}" role="button">
+	                                <span class="oi oi-document" title="Gerar Autorização" aria-hidden="true"></span>
 	                            </a>
 	                        </td>
 	                    </tr>
