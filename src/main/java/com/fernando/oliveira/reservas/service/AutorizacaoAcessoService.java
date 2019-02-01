@@ -69,7 +69,7 @@ public class AutorizacaoAcessoService {
 			
 			PdfWriter.getInstance(document, out);
 			document.open();
-			document.add(getTitulo("CAUTORIZAÇÃO DE LOCAÇÃO POR TEMPORADA"));
+			document.add(getTitulo("AUTORIZAÇÃO DE LOCAÇÃO POR TEMPORADA"));
 			document.add(getSubTitulo("Rua Rio de Janeiro, 50 – apto 617/618 - Edifício Bandeirantes"));
 			document.add(getDadosProprietario());
 			document.add(getDadosViajante(reserva));
@@ -112,10 +112,13 @@ public class AutorizacaoAcessoService {
 		Paragraph paragraph = new Paragraph();
 		paragraph.setAlignment(Element.ALIGN_JUSTIFIED);
 		paragraph.add(LINHA);
-		paragraph.add("Nome: " + reserva.getViajante().getNome());
+		Paragraph nome = new Paragraph("Nome: ",new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(0, 0, 0)));
+		paragraph.add(nome);
+		paragraph.add("   " + reserva.getViajante().getNome());
 		paragraph.add(LINHA);
-		
-		paragraph.add("E-mail ou CPF: " + reserva.getViajante().getEmail());
+		Paragraph email = new Paragraph("E-mail: ",new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(0, 0, 0)));
+		paragraph.add(email);
+		paragraph.add("   " + reserva.getViajante().getEmail());
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 		paragraph.add("e os ocupantes descritos abaixo a utilizar o apartamento no período de:");
