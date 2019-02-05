@@ -18,7 +18,7 @@ import javax.swing.text.DateFormatter;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-public class ReservaDateUtils {
+public class ReservaUtils {
 
 	
 	public static Date parseStringToDate(String data, String pattern) {

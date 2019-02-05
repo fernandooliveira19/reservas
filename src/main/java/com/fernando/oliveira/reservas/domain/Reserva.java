@@ -27,7 +27,7 @@ import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoReserva;
 import com.fernando.oliveira.reservas.domain.enums.TipoReserva;
-import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
+import com.fernando.oliveira.reservas.domain.utils.ReservaUtils;
 
 @Entity
 public class Reserva implements Serializable {
@@ -184,13 +184,13 @@ public class Reserva implements Serializable {
 
 	public String getDataEntradaFormatada() {
 		
-		return ReservaDateUtils.formatarDataLocal(dataEntrada);
+		return ReservaUtils.formatarDataLocal(dataEntrada);
 	}
 	
 	
 	public String getDataSaidaFormatada() {
 		
-		return ReservaDateUtils.formatarDataLocal(dataSaida);
+		return ReservaUtils.formatarDataLocal(dataSaida);
 	}
 
 	

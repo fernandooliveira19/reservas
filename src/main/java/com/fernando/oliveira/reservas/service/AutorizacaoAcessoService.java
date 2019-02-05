@@ -25,7 +25,7 @@ import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.Viajante;
 import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
-import com.fernando.oliveira.reservas.domain.utils.ReservaDateUtils;
+import com.fernando.oliveira.reservas.domain.utils.ReservaUtils;
 import com.fernando.oliveira.reservas.repository.ViajanteRepository;
 import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
@@ -261,7 +261,7 @@ public class AutorizacaoAcessoService {
 		paragraph.add(LINHA);
 	
 		paragraph.add("Guarujá,  ");
-		paragraph.add(ReservaDateUtils.getDataAtual());
+		paragraph.add(ReservaUtils.getDataAtual());
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 
