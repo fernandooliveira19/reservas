@@ -7,7 +7,7 @@
 
 <script type="text/javascript">
 	
-	function preencherValorLancamento(){
+	function showDataPagamento(){
 		
 		alert('1'); 
 			
@@ -54,7 +54,7 @@
 						<div class="invalid-feedback"></div>
 					</div>
 					<div class="form-group col-md-4">
-						<label for="valor">Valor Total</label> <input type="text"
+						<label for="valorTotal">Valor Total</label> <input type="text"
 							class="form-control" id="valorTotal" data-mask="#.##0,00"
 							data-mask-reverse="true" name="valorTotal"  th:field="*{valorTotal}" />
 						<div class="invalid-feedback"></div>
@@ -112,15 +112,15 @@
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
-										<label for="dataLancamento">Data Agendamento</label> <input type="date"
-											class="form-control" id="dataLancamento"
+										<label for="dataLancamento0">Data Agendamento</label> <input type="date"
+											class="form-control" id="dataLancamento0"
 											data-mask-reverse="true" name="valor"
 											th:field="*{lancamentos[0].dataLancamento}" onclick="preencherValorLancamento();"/>
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-2">
-										<label for="formaPagamento">Forma Pagamento</label> <select
-											id="formaPagamento" class="form-control"
+										<label for="formaPagamento0">Forma Pagamento</label> <select
+											id="formaPagamento0" class="form-control"
 											th:field="*{lancamentos[0].formaPagamento}">
 											<option value="">Selecione...</option>
 											<option th:each="f : ${formasPagamento}" th:value="${f}"
@@ -129,9 +129,9 @@
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-2">
-										<label for="pagamento">Status</label>
+										<label for="situacaoPagamento0">Status</label>
 										 <select
-											id="formaPagamento0" class="form-control"
+											id="situacaoPagamento0" class="form-control"
 											th:field="*{lancamentos[0].situacaoPagamento}"
 											onchange="showDataPagamento();">
 											<option value="">Selecione...</option>
@@ -141,8 +141,8 @@
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
-										<label for="dataPagamento">Data Pagamento</label> <input type="date"
-											class="form-control" id="dataPagamento"
+										<label for="dataPagamento0">Data Pagamento</label> <input type="date"
+											class="form-control" id="dataPagamento0"
 											data-mask-reverse="true" name="valor"
 											th:field="*{lancamentos[0].dataPagamento}" />
 										<div class="invalid-feedback"></div>
@@ -163,21 +163,21 @@
 							<div class="card-body">
 								<div class="form-row">
 									<div class="form-group col-md-2">
-										<label for="valor">Valor</label> <input type="text"
-											class="form-control" id="valorLancamento02" data-mask="#.##0,00"
+										<label for="valorLancamento1">Valor</label> <input type="text"
+											class="form-control" id="valorLancamento1" data-mask="#.##0,00"
 											data-mask-reverse="true" name="valorLancamento02"
 											th:field="*{lancamentos[1].valorLancamento}" />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
-										<label for="valor">Data Agendamento</label> <input type="date"
-											class="form-control" id="dataLancamento"
+										<label for="dataLancamento1">Data Agendamento</label> <input type="date"
+											class="form-control" id="dataLancamento1"
 											data-mask-reverse="true" name="valor"
 											th:field="*{lancamentos[1].dataLancamento}" />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-2">
-										<label for="formaPagamento">Forma Pagamento</label> <select
+										<label for="formaPagamento1">Forma Pagamento</label> <select
 											id="formaPagamento1" class="form-control"
 											th:field="*{lancamentos[1].formaPagamento}">
 											<option value="">Selecione...</option>
@@ -188,8 +188,8 @@
 
 									</div>
 									<div class="form-group col-md-2">
-										<label for="pagamento1">Status</label> <select
-											id="pagamento1" class="form-control"
+										<label for="situacaoPagamento1">Status</label> <select
+											id="situacaoPagamento1" class="form-control"
 											th:field="*{lancamentos[1].situacaoPagamento}">
 											<option value="">Selecione...</option>
 											<option th:each="p : ${situacoesPagamento}" th:value="${p}"
