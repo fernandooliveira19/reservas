@@ -2,19 +2,34 @@
 <html layout:decorate="~{layout}">
 <head>
 <meta charset="UTF-8" />
-</head>
+
 
 
 <script type="text/javascript">
 	
 	function showDataPagamento(){
 		
-		alert('1'); 
+		var sitPagto0 = document.getElementById("situacaoPagamento0");
+		document.getElementById("divDataPagamento0").style.display = "";
+		if(sitPagto0.value == 'PAGO'){
+			document.getElementById("divDataPagamento0").style.display = "";
+		}
+		
 			
+	}
+	
+	function calcularValorLancamento(){
+		var valorTotal = parseFloat(document.getElementById("valorTotal").value.replace(".","").replace(",","."));
+		var valorLancamento0 = parseFloat(document.getElementById("valorLancamento0").value.replace(".","").replace(",","."));
+		var resultado = valorTotal - valorLancamento0;
+		var valor = resultado.toLocaleString('pt-br', {minimumFractionDigits: 2});
+
+		document.getElementById("valorLancamento1").value = valor;
+		
 	}
 </script>
 
-
+</head>
 
 
 <body>
@@ -108,7 +123,7 @@
 											class="form-control" id="valorLancamento0" data-mask="#.##0,00"
 											data-mask-reverse="true" name="valorLancamento0"
 											th:field="*{lancamentos[0].valorLancamento}"
-											onkeydown="preencherValorLancamento();"  />
+											onchange="calcularValorLancamento();"  />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
@@ -134,13 +149,12 @@
 											id="situacaoPagamento0" class="form-control"
 											th:field="*{lancamentos[0].situacaoPagamento}"
 											onchange="showDataPagamento();">
-											<option value="">Selecione...</option>
 											<option th:each="p : ${situacoesPagamento}" th:value="${p}"
 												th:text="${p.descricao}"></option>
 										</select>
 										<div class="invalid-feedback"></div>
 									</div>
-									<div class="form-group col-md-3">
+									<div class="form-group col-md-3" id="divDataPagamento0">
 										<label for="dataPagamento0">Data Pagamento</label> <input type="date"
 											class="form-control" id="dataPagamento0"
 											data-mask-reverse="true" name="valor"
