@@ -56,7 +56,7 @@ public class ViajanteService {
 	}
 	
 	public List<Viajante> findAll() {
-		List<Viajante> lista = repository.findAll();
+		List<Viajante> lista = repository.findAllOrderByNomeAsc();
 		return lista;
 	}
 	public boolean viajanteTemReservas(Integer id) {

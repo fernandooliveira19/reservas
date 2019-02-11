@@ -28,7 +28,6 @@ public class ReservaService {
 	@Autowired
 	private LancamentoService lancamentoService;
 
-	
 	/**
 	 * 
 	 * @param reserva
@@ -51,8 +50,7 @@ public class ReservaService {
 			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
 				Lancamento lancamento = reserva.getLancamentos().get(i);
 
-				if (lancamento.getValorLancamento() != null
-						&& lancamento.getValorLancamento().doubleValue() > 0) {
+				if (lancamento.getValorLancamento() != null && lancamento.getValorLancamento().doubleValue() > 0) {
 					atribuirPagamentoSinal(i, lancamento);
 
 					if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
@@ -109,26 +107,27 @@ public class ReservaService {
 
 			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
 
-				Lancamento lancamento = lancamentoService.find(reserva.getLancamentos().get(i).getId());
+				if (reserva.getLancamentos().get(i) != null && reserva.getLancamentos().get(i).getId() != null) {
+					Lancamento lancamento = lancamentoService.find(reserva.getLancamentos().get(i).getId());
 
-				lancamento.setDataLancamento(reserva.getLancamentos().get(i).getDataLancamento());
-				lancamento.setDataPagamento(reserva.getLancamentos().get(i).getDataPagamento());
-				lancamento.setFormaPagamento(reserva.getLancamentos().get(i).getFormaPagamento());
-				lancamento.setSituacaoPagamento(reserva.getLancamentos().get(i).getSituacaoPagamento());
-				lancamento.setValorLancamento(reserva.getLancamentos().get(i).getValorLancamento());
+					lancamento.setDataLancamento(reserva.getLancamentos().get(i).getDataLancamento());
+					lancamento.setDataPagamento(reserva.getLancamentos().get(i).getDataPagamento());
+					lancamento.setFormaPagamento(reserva.getLancamentos().get(i).getFormaPagamento());
+					lancamento.setSituacaoPagamento(reserva.getLancamentos().get(i).getSituacaoPagamento());
+					lancamento.setValorLancamento(reserva.getLancamentos().get(i).getValorLancamento());
 
-				atribuirPagamentoSinal(i, lancamento);
+					atribuirPagamentoSinal(i, lancamento);
 
-				if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
-					valorPago = valorPago.add(lancamento.getValorLancamento());
+					if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
+						valorPago = valorPago.add(lancamento.getValorLancamento());
+					}
+
+					definirValorPendente(reserva, valorPago);
+
+					lancamento.setReserva(reserva);
+					lancamentoService.update(lancamento);
 				}
-
-				definirValorPendente(reserva, valorPago);
-
-				lancamento.setReserva(reserva);
-				lancamentoService.update(lancamento);
 			}
-
 		}
 
 		definirStatusReserva(reserva, valorPago);
@@ -185,10 +184,11 @@ public class ReservaService {
 
 		return lista;
 	}
-	public List<Reserva> proximasReservas(){
-		
+
+	public List<Reserva> proximasReservas() {
+
 		List<Reserva> lista = repository.findProximasReservas();
-		
+
 		return lista;
 	}
 
