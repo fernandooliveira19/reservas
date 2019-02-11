@@ -28,6 +28,12 @@ public class ReservaService {
 	@Autowired
 	private LancamentoService lancamentoService;
 
+	
+	/**
+	 * 
+	 * @param reserva
+	 * @return
+	 */
 	@Transactional
 	public Reserva insert(Reserva reserva) {
 
