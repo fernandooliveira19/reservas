@@ -26,96 +26,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Component
 public class PdfReportService {
 
-	@Value("${contrato.titulo}")
-	private String contratoTitulo;
-	
-	@Value("${contrato.item01.titulo}")
-	private String contratoItem01Titulo;
-	
-	@Value("${contrato.item01.paragrafo.01}")
-	private String contratoItem01Paragrafo01;
-	
-	@Value("${contrato.item01.paragrafo.02}")
-	private String contratoItem01Paragrafo02;
-	
-	@Value("${contrato.item01.paragrafo.03}")
-	private String contratoItem01Paragrafo03;
-	
-	@Value("${contrato.item01.paragrafo.04}")
-	private String contratoItem01Paragrafo04;
-	
-	@Value("${contrato.item01.paragrafo.05}")
-	private String contratoItem01Paragrafo05;
-	
-	
-	//item 02
-	@Value("${contrato.item02.titulo}")
-	private String contratoItem02Titulo;
-	
-	@Value("${contrato.item02.paragrafo.01}")
-	private String contratoItem02Paragrafo01;
-	
-	@Value("${contrato.item02.paragrafo.02}")
-	private String contratoItem02Paragrafo02;
-	
-	@Value("${contrato.item02.paragrafo.03}")
-	private String contratoItem02Paragrafo03;
-	
-	@Value("${contrato.item02.paragrafo.04}")
-	private String contratoItem02Paragrafo04;
-	
-	@Value("${contrato.item02.paragrafo.05}")
-	private String contratoItem02Paragrafo05;
-	
-	@Value("${contrato.item02.paragrafo.06}")
-	private String contratoItem02Paragrafo06;
-	
-	@Value("${contrato.item02.paragrafo.07}")
-	private String contratoItem02Paragrafo07;
-	
-	@Value("${contrato.item02.paragrafo.08}")
-	private String contratoItem02Paragrafo08;
-	
-	@Value("${contrato.item02.paragrafo.09}")
-	private String contratoItem02Paragrafo09;
-	
-	//item 03
-	@Value("${contrato.item03.titulo}")
-	private String contratoItem03Titulo;
-	
-	@Value("${contrato.item03.paragrafo.01}")
-	private String contratoItem03Paragrafo01;
-	
-	@Value("${contrato.item03.paragrafo.02}")
-	private String contratoItem03Paragrafo02;
-	
-	@Value("${contrato.item03.paragrafo.03}")
-	private String contratoItem03Paragrafo03;
-	
-	@Value("${contrato.item03.paragrafo.04}")
-	private String contratoItem03Paragrafo04;
-	
-	@Value("${contrato.item03.paragrafo.05}")
-	private String contratoItem03Paragrafo05;
-	
-	@Value("${contrato.item03.paragrafo.06}")
-	private String contratoItem03Paragrafo06;
-	
-	//item 04
-	@Value("${contrato.item04.titulo}")
-	private String contratoItem04Titulo;
-		
-	@Value("${contrato.item04.paragrafo.01}")
-	private String contratoItem04Paragrafo01;
-	
-	@Value("${contrato.item04.paragrafo.02}")
-	private String contratoItem04Paragrafo02;
-	
-	@Value("${contrato.item04.paragrafo.03}")
-	private String contratoItem04Paragrafo03;
-	
-	@Value("${contrato.item04.paragrafo.04}")
-	private String contratoItem04Paragrafo04;
 	
 	//item 05
 //		@Value("${contrato.item05.titulo}")
@@ -132,26 +42,7 @@ public class PdfReportService {
 
 		try {
 
-			Paragraph titulo = new Paragraph(contratoTitulo);
-			titulo.setAlignment(Element.ALIGN_CENTER);
-			titulo.add("\n\n");
-			
-			Paragraph item01 = new Paragraph(contratoItem01Titulo);
-			item01.setAlignment(Element.ALIGN_LEFT);
-			item01.add("\n");
-			item01.add(contratoItem01Paragrafo01);
-			item01.add("\n");
-			item01.add(contratoItem01Paragrafo02);
-			item01.add("\n");
-			item01.add(contratoItem01Paragrafo03);
-			item01.add("\n");
-			item01.add(contratoItem01Paragrafo04);
-			item01.add("\n");
-			item01.add(contratoItem01Paragrafo05);
-
-			Paragraph identificacaoPartes = new Paragraph(contratoItem01Titulo);
-			identificacaoPartes.setAlignment(Element.ALIGN_LEFT);
-			
+						
 			Paragraph nomeResponsavel = new Paragraph("Nome: " + reserva.getViajante().getNome());
 			Paragraph emailResponsavel = new Paragraph("E-mail: " + reserva.getViajante().getEmail());
 
@@ -201,8 +92,7 @@ public class PdfReportService {
 
 			PdfWriter.getInstance(document, out);
 			document.open();
-			document.add(titulo);
-			document.add(item01);
+			
 //			document.add(identificacaoPartes);
 //			document.add(nomeResponsavel);
 //			document.add(emailResponsavel);

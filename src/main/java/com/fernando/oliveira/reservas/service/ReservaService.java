@@ -45,7 +45,8 @@ public class ReservaService {
 			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
 				Lancamento lancamento = reserva.getLancamentos().get(i);
 
-				if (lancamento.getValorLancamento() != null) {
+				if (lancamento.getValorLancamento() != null
+						&& lancamento.getValorLancamento().doubleValue() > 0) {
 					atribuirPagamentoSinal(i, lancamento);
 
 					if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
@@ -176,6 +177,12 @@ public class ReservaService {
 		//
 		// }
 
+		return lista;
+	}
+	public List<Reserva> proximasReservas(){
+		
+		List<Reserva> lista = repository.findProximasReservas();
+		
 		return lista;
 	}
 

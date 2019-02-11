@@ -57,6 +57,13 @@ public class ReservaController {
 		return "/reserva/lista";
 	}
 	
+	@GetMapping("/proximas")
+	public String listarProximas(ModelMap model) {
+		List<Reserva> reservas = reservaService.proximasReservas();
+		model.addAttribute("reservas", reservas);
+		return "/reserva/lista";
+	}
+	
 	@PostMapping("/salvar")
 	public String salvar(Reserva reserva, RedirectAttributes attr) {
 

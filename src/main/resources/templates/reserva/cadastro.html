@@ -6,13 +6,16 @@
 
 
 <script type="text/javascript">
+
 	
 	function showDataPagamento(){
 		
 		var sitPagto0 = document.getElementById("situacaoPagamento0");
-		document.getElementById("divDataPagamento0").style.display = "";
+		
 		if(sitPagto0.value == 'PAGO'){
-			document.getElementById("divDataPagamento0").style.display = "";
+			document.getElementById("divDataPagamento0").style.display = "block";
+		}else{
+			document.getElementById("divDataPagamento0").style.display = "none";
 		}
 		
 			
@@ -56,7 +59,8 @@
 
 			<form
 				th:action="${reserva.id == null} ? @{/reservas/salvar} : @{/reservas/editar}"
-				th:object="${reserva}" method="POST">
+				th:object="${reserva}" method="POST"
+				onshow="carregarLancamentos()">
 				<div class="form-row">
 					<div class="form-group col-md-4">
 						<label for="viajante">Viajante</label> <select id="viajante"
@@ -148,7 +152,7 @@
 										 <select
 											id="situacaoPagamento0" class="form-control"
 											th:field="*{lancamentos[0].situacaoPagamento}"
-											onchange="showDataPagamento();">
+											onchange="showDataPagamento(this);">
 											<option th:each="p : ${situacoesPagamento}" th:value="${p}"
 												th:text="${p.descricao}"></option>
 										</select>
