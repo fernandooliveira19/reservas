@@ -148,6 +148,10 @@ public class Lancamento implements Serializable {
 		return ReservaUtils.formatarValorMonetario(valorLancamento);
 	}
 	
+	public String getDataLancamentoFormatada() {
+		return ReservaUtils.formatarDataLocal(dataLancamento);
+	}
+	
 	
 	
 }

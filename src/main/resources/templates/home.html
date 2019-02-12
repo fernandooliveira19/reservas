@@ -33,7 +33,7 @@
 					</thead>
 					<tbody>
 						<tr th:each="l : ${lancamentosPendentes}">
-							<td th:text="${l.dataLancamento}">13/02/2019</td>
+							<td th:text="${l.dataLancamentoFormatada}" >13/02/2019</td>
 							<td th:text="${l.valorFormatado}">900.00</td>
 							<td th:text="${l.reserva.viajante.nome}">Maria do Carmo</td>
 							<td th:text="${l.reserva.dataEntradaFormatada}">15/02/2019 18:00</td>
