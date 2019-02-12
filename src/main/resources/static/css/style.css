@@ -118,3 +118,13 @@ body {
 	color: #777777;
 	text-align: center;
 }
+
+/*
+* titulo lista
+*/
+.title_list {
+	font:bold;
+	color: #000000;
+	text-align: center;
+	
+}

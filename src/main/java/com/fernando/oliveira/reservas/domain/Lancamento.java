@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.enums.FormaPagamento;
 import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
+import com.fernando.oliveira.reservas.domain.utils.ReservaUtils;
 
 @Entity
 public class Lancamento implements Serializable {
@@ -143,7 +144,9 @@ public class Lancamento implements Serializable {
 		this.pagamentoSinal = pagamentoSinal;
 	}
 
-	
+	public String getValorFormatado() {
+		return ReservaUtils.formatarValorMonetario(valorLancamento);
+	}
 	
 	
 	

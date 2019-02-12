@@ -48,7 +48,9 @@ public class ReservaService {
 		if (!reserva.getLancamentos().isEmpty()) {
 
 			for (int i = 0; i < reserva.getLancamentos().size(); i++) {
-				Lancamento lancamento = reserva.getLancamentos().get(i);
+				Lancamento lancamento = new Lancamento();
+				
+				atribuirDadosLancamento(reserva.getLancamentos().get(i), lancamento);
 
 				if (lancamento.getValorLancamento() != null && lancamento.getValorLancamento().doubleValue() > 0) {
 					atribuirPagamentoSinal(i, lancamento);
@@ -74,6 +76,16 @@ public class ReservaService {
 		repository.save(reserva);
 
 		return reserva;
+	}
+
+	private void atribuirDadosLancamento(Lancamento lancamentoReserva, Lancamento lancamento) {
+		lancamento.setDataLancamento(lancamentoReserva.getDataLancamento());
+		lancamento.setDataPagamento(lancamentoReserva.getDataPagamento());
+		lancamento.setFormaPagamento(lancamentoReserva.getFormaPagamento());
+		lancamento.setReserva(lancamentoReserva.getReserva());
+		lancamento.setSituacaoPagamento(lancamentoReserva.getSituacaoPagamento());
+		lancamento.setValorLancamento(lancamentoReserva.getValorLancamento());
+		
 	}
 
 	private void definirStatusReserva(Reserva reserva, BigDecimal valorPago) {

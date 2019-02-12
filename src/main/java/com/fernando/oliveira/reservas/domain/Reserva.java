@@ -193,7 +193,9 @@ public class Reserva implements Serializable {
 		return ReservaUtils.formatarDataLocal(dataSaida);
 	}
 
-	
+	public BigDecimal getValorPago() {
+		return valorTotal.subtract(valorPendente);
+	}
 
 	
 	

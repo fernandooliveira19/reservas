@@ -209,7 +209,6 @@
 										<label for="situacaoPagamento1">Status</label> <select
 											id="situacaoPagamento1" class="form-control"
 											th:field="*{lancamentos[1].situacaoPagamento}">
-											<option value="">Selecione...</option>
 											<option th:each="p : ${situacoesPagamento}" th:value="${p}"
 												th:text="${p.descricao}"></option>
 										</select>

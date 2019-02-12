@@ -76,19 +76,10 @@ public class LancamentoController {
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Integer id, ModelMap model) {
 		
-//		Lancamento lancamento = lancamentoService.find(id);
-		
-//		if (!lancamento.getReservas().isEmpty()) {
-//			model.addAttribute("fail", "Lancamento não removido. Possui reserva(s) vinculada(s).");
-//		} else {
-//			
-////			lancamento.setSituacao(Situacao.INATIVO);
-////			lancamentoService.update(lancamento);
-//			model.addAttribute("success", "Lancamento inativado com sucesso.");
-//		}
-		
 		return listar(model);
 	}
+	
+	
 	
 	@ModelAttribute("viajantes")
 	public List<Viajante> listaViajantes(){

@@ -28,12 +28,6 @@ public class LancamentoService {
 	@Transactional
 	public Lancamento insert(Lancamento lancamento) {
 		
-//		Reserva reserva = reservaService.find(lancamento.getReserva().getId());
-//		
-//		if(reserva == null) {
-//			lancamento.setReserva(reserva);
-//		}
-		lancamento.setSituacaoPagamento(SituacaoPagamento.PENDENTE);
 		repository.save(lancamento);
 		
 		return lancamento;
@@ -60,9 +54,9 @@ public class LancamentoService {
 		return null;
 	}
 
-	public List<Lancamento> findByLancamentosPendentes(){
+	public List<Lancamento> findLancamentosPendentes(){
 		
-		return null;
+		return repository.findLancamentosPendentes();
 	}
 
 }
