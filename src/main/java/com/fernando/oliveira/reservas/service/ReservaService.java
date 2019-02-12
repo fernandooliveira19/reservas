@@ -1,12 +1,14 @@
 package com.fernando.oliveira.reservas.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fernando.oliveira.reservas.domain.Lancamento;
@@ -33,10 +35,11 @@ public class ReservaService {
 	 * @param reserva
 	 * @return
 	 */
-	@Transactional
+	@Transactional(propagation=Propagation.REQUIRED, readOnly=false)
 	public Reserva insert(Reserva reserva) {
 
 		Viajante viajante = viajanteService.find(reserva.getViajante().getId());
+		List<Lancamento> lancamentos = new ArrayList<Lancamento>();
 
 		if (viajante == null) {
 			return null;
@@ -61,6 +64,7 @@ public class ReservaService {
 
 					lancamento.setReserva(reserva);
 					lancamentoService.insert(lancamento);
+					lancamentos.add(lancamento);
 					if (lancamento.getFormaPagamento().equals(FormaPagamento.SITE)) {
 						break;
 					}
@@ -72,6 +76,8 @@ public class ReservaService {
 		definirStatusReserva(reserva, valorPago);
 
 		definirValorPendente(reserva, valorPago);
+		
+		reserva.setLancamentos(lancamentos);
 
 		repository.save(reserva);
 
