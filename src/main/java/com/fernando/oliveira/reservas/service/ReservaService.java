@@ -148,7 +148,13 @@ public class ReservaService {
 			}
 		}
 
+		if(reserva.getValorPendente() == null) {
+			reserva.setValorPendente(new BigDecimal(0));
+		}
+		
 		definirStatusReserva(reserva, valorPago);
+		
+		
 	}
 
 	private void atribuirPagamentoSinal(int i, Lancamento lancamento) {
@@ -161,6 +167,10 @@ public class ReservaService {
 
 	private void definirValorPendente(Reserva reserva, BigDecimal valorPago) {
 		BigDecimal valorPendente = reserva.getValorTotal().subtract(valorPago);
+		
+		if(valorPendente == null) {
+			valorPendente = new BigDecimal(0);
+		}
 		reserva.setValorPendente(valorPendente);
 	}
 

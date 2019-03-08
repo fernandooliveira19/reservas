@@ -4,31 +4,99 @@
 <meta charset="UTF-8" />
 
 
-
+<script src="/webjars/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 
+	$(document).ready(function(){
+		
+		exibirLancamentos();
+		showFieldDataPagamento();	
+		getIntervalDates();
+		
+	}); 
+		
 	
-	function showDataPagamento(){
+	
+	function showFieldDataPagamento() {
 		
-		var sitPagto0 = document.getElementById("situacaoPagamento0");
+		var pagto0 = $("#situacaoPagamento0").val();
 		
-		if(sitPagto0.value == 'PAGO'){
-			document.getElementById("divDataPagamento0").style.display = "block";
+		if(pagto0 == 'PAGO'){
+			$("#divDataPagamento0").hide();
 		}else{
-			document.getElementById("divDataPagamento0").style.display = "none";
+			$("#divDataPagamento0").show();
 		}
 		
-			
+		var pagto1 = $("#situacaoPagamento1").val();
+		if(pagto0 == 'PAGO'){
+			$("#divDataPagamento1").hide();
+		}else{
+			$("#divDataPagamento1").show();
+		}
+		
+
 	}
-	
-	function calcularValorLancamento(){
-		var valorTotal = parseFloat(document.getElementById("valorTotal").value.replace(".","").replace(",","."));
-		var valorLancamento0 = parseFloat(document.getElementById("valorLancamento0").value.replace(".","").replace(",","."));
+
+	function calcularValorLancamento() {
+		var valorTotal = parseFloat(document.getElementById("valorTotal").value
+				.replace(".", "").replace(",", "."));
+		var valorLancamento0 = parseFloat(document
+				.getElementById("valorLancamento0").value.replace(".", "")
+				.replace(",", "."));
 		var resultado = valorTotal - valorLancamento0;
-		var valor = resultado.toLocaleString('pt-br', {minimumFractionDigits: 2});
+		var valor = resultado.toLocaleString('pt-br', {
+			minimumFractionDigits : 2
+		});
 
 		document.getElementById("valorLancamento1").value = valor;
+
+	}
+	
+	function exibirLancamentos() {
 		
+		if ($("#formaPagamento0").val() == 'SITE'){
+			$("#divLancamento1").hide();
+		}else{
+			$("#divLancamento1").show();
+		}
+
+		
+	}
+	
+	function getIntervalDates(){
+		
+		$( function() {
+		    var dateFormat = "dd/MM/yyyy",
+		      from = $( "#dataEntrada" )
+		        .datepicker({
+		          defaultDate: "+1w",
+		          changeMonth: true,
+		          numberOfMonths: 3
+		        })
+		        .on( "change", function() {
+		          to.datepicker( "option", "minDate", getDate( this ) );
+		        }),
+		      to = $( "#dataSaida" ).datepicker({
+		        defaultDate: "+1w",
+		        changeMonth: true,
+		        numberOfMonths: 3
+		      })
+		      .on( "change", function() {
+		        from.datepicker( "option", "maxDate", getDate( this ) );
+		      });
+		 
+		    function getDate( element ) {
+		      var date;
+		      try {
+		        date = $.datepicker.parseDate( dateFormat, element.value );
+		      } catch( error ) {
+		        date = null;
+		      }
+		 
+		      return date;
+		    }
+		  } );
 	}
 </script>
 
@@ -59,8 +127,7 @@
 
 			<form
 				th:action="${reserva.id == null} ? @{/reservas/salvar} : @{/reservas/editar}"
-				th:object="${reserva}" method="POST"
-				onshow="carregarLancamentos()">
+				th:object="${reserva}" method="POST" onshow="carregarLancamentos()">
 				<div class="form-row">
 					<div class="form-group col-md-4">
 						<label for="viajante">Viajante</label> <select id="viajante"
@@ -75,7 +142,8 @@
 					<div class="form-group col-md-4">
 						<label for="valorTotal">Valor Total</label> <input type="text"
 							class="form-control" id="valorTotal" data-mask="#.##0,00"
-							data-mask-reverse="true" name="valorTotal"  th:field="*{valorTotal}" />
+							data-mask-reverse="true" name="valorTotal"
+							th:field="*{valorTotal}" />
 						<div class="invalid-feedback"></div>
 					</div>
 				</div>
@@ -115,8 +183,8 @@
 					<div class="card">
 						<div class="card-header">
 							<a class="card-link collapsed" data-toggle="collapse"
-								data-parent="#card-672316" href="#element-lancamento-01">1º
-								Pagamento</a>
+								data-parent="#card-672316" href="#element-lancamento-01"
+								onclick="showFieldDataPagamento();">1º Pagamento</a>
 						</div>
 						<div id="element-lancamento-01" class="collapse">
 							<div class="card-body">
@@ -124,23 +192,26 @@
 								<div class="form-row">
 									<div class="form-group col-md-2">
 										<label for="valorLancamento0">Valor</label> <input type="text"
-											class="form-control" id="valorLancamento0" data-mask="#.##0,00"
-											data-mask-reverse="true" name="valorLancamento0"
+											class="form-control" id="valorLancamento0"
+											data-mask="#.##0,00" data-mask-reverse="true"
+											name="valorLancamento0"
 											th:field="*{lancamentos[0].valorLancamento}"
-											onchange="calcularValorLancamento();"  />
+											onchange="calcularValorLancamento();" />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
-										<label for="dataLancamento0">Data Agendamento</label> <input type="date"
-											class="form-control" id="dataLancamento0"
+										<label for="dataLancamento0">Data Agendamento</label> <input
+											type="date" class="form-control" id="dataLancamento0"
 											data-mask-reverse="true" name="valor"
-											th:field="*{lancamentos[0].dataLancamento}" onclick="preencherValorLancamento();"/>
+											th:field="*{lancamentos[0].dataLancamento}"
+											onclick="preencherValorLancamento();" />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-2">
 										<label for="formaPagamento0">Forma Pagamento</label> <select
 											id="formaPagamento0" class="form-control"
-											th:field="*{lancamentos[0].formaPagamento}">
+											th:field="*{lancamentos[0].formaPagamento}"
+											onchange="exibirLancamentos();">
 											<option value="">Selecione...</option>
 											<option th:each="f : ${formasPagamento}" th:value="${f}"
 												th:text="${f.descricao}"></option>
@@ -148,19 +219,18 @@
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-2">
-										<label for="situacaoPagamento0">Status</label>
-										 <select
+										<label for="situacaoPagamento0">Status</label> <select
 											id="situacaoPagamento0" class="form-control"
 											th:field="*{lancamentos[0].situacaoPagamento}"
-											onchange="showDataPagamento(this);">
+											onchange="showFieldDataPagamento();">
 											<option th:each="p : ${situacoesPagamento}" th:value="${p}"
 												th:text="${p.descricao}"></option>
 										</select>
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3" id="divDataPagamento0">
-										<label for="dataPagamento0">Data Pagamento</label> <input type="date"
-											class="form-control" id="dataPagamento0"
+										<label for="dataPagamento0">Data Pagamento</label> <input
+											type="date" class="form-control" id="dataPagamento0"
 											data-mask-reverse="true" name="valor"
 											th:field="*{lancamentos[0].dataPagamento}" />
 										<div class="invalid-feedback"></div>
@@ -172,24 +242,27 @@
 						</div>
 					</div>
 					<!--card 2 -->
-					<div class="card">
+					<div class="card" id="divLancamento1">
 						<div class="card-header">
 							<a class="card-link collapsed" data-toggle="collapse"
-								data-parent="#card-672316" href="#element-lancamento-02">2º Pagamento</a>
+								data-parent="#card-672316" href="#element-lancamento-02"
+								onclick="showFieldDataPagamento();">2º Pagamento</a>
 						</div>
-						<div id="element-lancamento-02" class="collapse" onload="preencherValorLancamento();">
+						<div id="element-lancamento-02" class="collapse"
+							onload="preencherValorLancamento();">
 							<div class="card-body">
 								<div class="form-row">
 									<div class="form-group col-md-2">
 										<label for="valorLancamento1">Valor</label> <input type="text"
-											class="form-control" id="valorLancamento1" data-mask="#.##0,00"
-											data-mask-reverse="true" name="valorLancamento02"
+											class="form-control" id="valorLancamento1"
+											data-mask="#.##0,00" data-mask-reverse="true"
+											name="valorLancamento02"
 											th:field="*{lancamentos[1].valorLancamento}" />
 										<div class="invalid-feedback"></div>
 									</div>
 									<div class="form-group col-md-3">
-										<label for="dataLancamento1">Data Agendamento</label> <input type="date"
-											class="form-control" id="dataLancamento1"
+										<label for="dataLancamento1">Data Agendamento</label> <input
+											type="date" class="form-control" id="dataLancamento1"
 											data-mask-reverse="true" name="valor"
 											th:field="*{lancamentos[1].dataLancamento}" />
 										<div class="invalid-feedback"></div>
@@ -208,16 +281,17 @@
 									<div class="form-group col-md-2">
 										<label for="situacaoPagamento1">Status</label> <select
 											id="situacaoPagamento1" class="form-control"
-											th:field="*{lancamentos[1].situacaoPagamento}">
+											th:field="*{lancamentos[1].situacaoPagamento}"
+											onchange="showFieldDataPagamento();">
 											<option th:each="p : ${situacoesPagamento}" th:value="${p}"
 												th:text="${p.descricao}"></option>
 										</select>
 										<div class="invalid-feedback"></div>
 
 									</div>
-									<div class="form-group col-md-3">
-										<label for="dataPagamento1">Data Pagamento</label> <input type="date"
-											class="form-control" id="dataPagamento1"
+									<div class="form-group col-md-3" id="divDataPagamento1">
+										<label for="dataPagamento1">Data Pagamento</label> <input
+											type="date" class="form-control" id="dataPagamento1"
 											data-mask-reverse="true" name="dataPagamento1"
 											th:field="*{lancamentos[1].dataPagamento}" />
 										<div class="invalid-feedback"></div>
@@ -230,19 +304,32 @@
 
 				</div>
 
-				<input type="hidden" id="id" th:field="*{id}" />
-				<input type="hidden" id="lancamento0.id" th:field="*{lancamentos[0].id}" />
-				<input type="hidden" id="lancamento1.id" th:field="*{lancamentos[1].id}" />
+				<input type="hidden" id="id" th:field="*{id}" /> <input
+					type="hidden" id="lancamento0.id" th:field="*{lancamentos[0].id}" />
+				<input type="hidden" id="lancamento1.id"
+					th:field="*{lancamentos[1].id}" />
+
 				
-				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
 				<div>
-				
+					<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+					<button type="button" class="btn btn-primary btn-sm" >Enviar Contrato</button>
+					<button type="button" class="btn btn-primary btn-sm" >Enviar Autorização</button>            
 				</div>
 			</form>
 
-		
+
 
 		</div>
+		<script type="text/javascript">
+			
+			exibirLancamentos();
+			//showFieldDataPagamento();
+
+			
+		</script>
 	</section>
+
 </body>
+
+
 </html>
