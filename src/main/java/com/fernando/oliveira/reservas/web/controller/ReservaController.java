@@ -59,7 +59,7 @@ public class ReservaController {
 	
 	@GetMapping("/proximas")
 	public String listarProximas(ModelMap model) {
-		List<Reserva> reservas = reservaService.proximasReservas();
+		List<Reserva> reservas = reservaService.nextReservas();
 		model.addAttribute("reservas", reservas);
 		return "reserva/lista";
 	}
@@ -70,7 +70,7 @@ public class ReservaController {
 		reservaService.insert(reserva);
 		
 		attr.addFlashAttribute("success", "Reserva inserida com sucesso");
-		return "redirect:reservas/cadastrar";
+		return "redirect:cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -83,7 +83,7 @@ public class ReservaController {
 	public String editar(Reserva reserva, RedirectAttributes attr) {
 		reservaService.update(reserva);
 		attr.addFlashAttribute("success", "Reserva editada com sucesso.");
-		return "redirect:reservas/cadastrar";
+		return "redirect:cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
@@ -112,9 +112,9 @@ public class ReservaController {
 	
 	@PostMapping("/adicionarLancamento")
 	public String adicionarLancamento(Reserva reserva, RedirectAttributes attr) {
-//		reservaService.update(reserva);
+
 		attr.addFlashAttribute("success", "Reserva editada com sucesso.");
-		return "redirect:reservas/cadastrar";
+		return "redirect:cadastrar";
 	}
 	
 	@ModelAttribute("formasPagamento")

@@ -14,5 +14,9 @@ public interface ReservaRepository extends JpaRepository<Reserva, Integer>{
 	@Transactional(readOnly=true)
 	@Query("SELECT obj FROM Reserva obj WHERE obj.situacaoReserva NOT IN ('FINALIZADO','CANCELADO') ORDER BY obj.dataEntrada")
 	List<Reserva> findProximasReservas();
+	
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM Reserva obj ORDER BY obj.dataEntrada asc")
+	List<Reserva> findAllOrderByDataEntradaAsc();
 
 }
