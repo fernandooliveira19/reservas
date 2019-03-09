@@ -47,13 +47,13 @@ public class ViajanteController {
 		viajanteService.insert(viajante);
 		
 		attr.addFlashAttribute("success", "Viajante inserido com sucesso");
-		return "redirect:/viajantes/cadastrar";
+		return "redirect:viajantes/cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
 		model.addAttribute("viajante", viajanteService.find(id));
-		return "/viajante/cadastro";
+		return "viajante/cadastro";
 	}
 	
 	@PostMapping("/editar")
@@ -61,7 +61,7 @@ public class ViajanteController {
 		telefoneService.update(viajante.getTelefone());
 		viajanteService.update(viajante);
 		attr.addFlashAttribute("success", "Viajante editado com sucesso.");
-		return "redirect:/viajantes/cadastrar";
+		return "redirect:viajantes/cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
@@ -73,7 +73,6 @@ public class ViajanteController {
 			model.addAttribute("fail", "Viajante não removido. Possui reserva(s) vinculada(s).");
 		} else {
 			
-//			viajante.setSituacao(Situacao.INATIVO);
 			viajanteService.update(viajante);
 			model.addAttribute("success", "Viajante inativado com sucesso.");
 		}

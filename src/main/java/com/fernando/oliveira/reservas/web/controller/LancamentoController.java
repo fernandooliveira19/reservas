@@ -56,13 +56,13 @@ public class LancamentoController {
 		lancamentoService.insert(lancamento);
 		
 		attr.addFlashAttribute("success", "Lancamento inserido com sucesso");
-		return "redirect:/lancamentos/cadastrar";
+		return "redirect:lancamentos/cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
 		model.addAttribute("lancamento", lancamentoService.find(id));
-		return "/lancamento/cadastro";
+		return "lancamento/cadastro";
 	}
 	
 	@PostMapping("/editar")
@@ -70,7 +70,7 @@ public class LancamentoController {
 		
 		lancamentoService.update(lancamento);
 		attr.addFlashAttribute("success", "Lancamento editado com sucesso.");
-		return "redirect:/lancamentos/cadastrar";
+		return "redirect:lancamentos/cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")

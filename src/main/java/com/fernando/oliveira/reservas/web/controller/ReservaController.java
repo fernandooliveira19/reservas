@@ -47,7 +47,7 @@ public class ReservaController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Reserva reserva) {
-		return "/reserva/cadastro";
+		return "reserva/cadastro";
 	}
 	
 	@GetMapping("/listar")
@@ -70,7 +70,7 @@ public class ReservaController {
 		reservaService.insert(reserva);
 		
 		attr.addFlashAttribute("success", "Reserva inserida com sucesso");
-		return "redirect:/reservas/cadastrar";
+		return "redirect:reservas/cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -83,7 +83,7 @@ public class ReservaController {
 	public String editar(Reserva reserva, RedirectAttributes attr) {
 		reservaService.update(reserva);
 		attr.addFlashAttribute("success", "Reserva editada com sucesso.");
-		return "redirect:/reservas/cadastrar";
+		return "redirect:reservas/cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
@@ -114,7 +114,7 @@ public class ReservaController {
 	public String adicionarLancamento(Reserva reserva, RedirectAttributes attr) {
 //		reservaService.update(reserva);
 		attr.addFlashAttribute("success", "Reserva editada com sucesso.");
-		return "redirect:/reservas/cadastrar";
+		return "redirect:reservas/cadastrar";
 	}
 	
 	@ModelAttribute("formasPagamento")
