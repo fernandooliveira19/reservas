@@ -47,7 +47,7 @@ public class ViajanteController {
 		viajanteService.insert(viajante);
 		
 		attr.addFlashAttribute("success", "Viajante inserido com sucesso");
-		return "redirect:viajantes/cadastrar";
+		return "redirect:cadastrar";
 	}
 	
 	@GetMapping("/editar/{id}")
@@ -61,7 +61,7 @@ public class ViajanteController {
 		telefoneService.update(viajante.getTelefone());
 		viajanteService.update(viajante);
 		attr.addFlashAttribute("success", "Viajante editado com sucesso.");
-		return "redirect:viajantes/cadastrar";
+		return "redirect:cadastrar";
 	}
 	
 	@GetMapping("/excluir/{id}")
