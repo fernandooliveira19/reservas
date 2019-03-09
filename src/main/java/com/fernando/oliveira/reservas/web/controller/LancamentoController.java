@@ -38,14 +38,14 @@ public class LancamentoController {
 	@GetMapping("/cadastrar")
 	public String cadastrar(Lancamento lancamento) {
 		
-		return "/lancamento/cadastro";
+		return "lancamento/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		List<Lancamento> lancamentos = lancamentoService.findAll();
 		model.addAttribute("lancamentos", lancamentos);
-		return "/lancamento/lista";
+		return "lancamento/lista";
 	}
 	
 	@PostMapping("/salvar")

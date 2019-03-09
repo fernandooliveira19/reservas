@@ -29,14 +29,14 @@ public class ViajanteController {
 	@GetMapping("/cadastrar")
 	public String cadastrar(Viajante viajante) {
 		
-		return "/viajante/cadastro";
+		return "viajante/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		List<Viajante> viajantes = viajanteService.findAll();
 		model.addAttribute("viajantes", viajantes);
-		return "/viajante/lista";
+		return "viajante/lista";
 	}
 	
 	@PostMapping("/salvar")

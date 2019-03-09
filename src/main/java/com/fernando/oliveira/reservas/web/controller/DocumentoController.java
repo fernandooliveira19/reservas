@@ -43,14 +43,14 @@ public class DocumentoController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Reserva reserva) {
-		return "/reserva/cadastro";
+		return "reserva/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		List<Reserva> reservas = reservaService.findAll();
 		model.addAttribute("reservas", reservas);
-		return "/documento/lista";
+		return "documento/lista";
 	}
 	
 	@PostMapping("/salvar")
@@ -65,7 +65,7 @@ public class DocumentoController {
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
 		model.addAttribute("reserva", reservaService.find(id));
-		return "/reserva/cadastro";
+		return "reserva/cadastro";
 	}
 	
 	@PostMapping("/editar")

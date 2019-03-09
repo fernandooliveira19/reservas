@@ -54,14 +54,14 @@ public class ReservaController {
 	public String listar(ModelMap model) {
 		List<Reserva> reservas = reservaService.findAll();
 		model.addAttribute("reservas", reservas);
-		return "/reserva/lista";
+		return "reserva/lista";
 	}
 	
 	@GetMapping("/proximas")
 	public String listarProximas(ModelMap model) {
 		List<Reserva> reservas = reservaService.proximasReservas();
 		model.addAttribute("reservas", reservas);
-		return "/reserva/lista";
+		return "reserva/lista";
 	}
 	
 	@PostMapping("/salvar")
@@ -76,7 +76,7 @@ public class ReservaController {
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
 		model.addAttribute("reserva", reservaService.find(id));
-		return "/reserva/cadastro";
+		return "reserva/cadastro";
 	}
 	
 	@PostMapping("/editar")
