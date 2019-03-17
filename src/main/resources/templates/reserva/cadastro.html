@@ -13,26 +13,32 @@
 		exibirLancamentos();
 		showFieldDataPagamento();	
 		getIntervalDates();
-		
+		enviarContrato();		
 	}); 
 		
-	
+	function enviarContrato(){
+		
+		var idReserva = $(".id").val();
+		$(".btn_contrato").click(function(){
+			$.post("/reserva/sendContract?id="+idReserva);
+		});
+	}
 	
 	function showFieldDataPagamento() {
 		
 		var pagto0 = $("#situacaoPagamento0").val();
 		
 		if(pagto0 == 'PAGO'){
-			$("#divDataPagamento0").hide();
-		}else{
 			$("#divDataPagamento0").show();
+		}else{
+			$("#divDataPagamento0").hide();
 		}
 		
 		var pagto1 = $("#situacaoPagamento1").val();
-		if(pagto0 == 'PAGO'){
-			$("#divDataPagamento1").hide();
-		}else{
+		if(pagto1 == 'PAGO'){
 			$("#divDataPagamento1").show();
+		}else{
+			$("#divDataPagamento1").hide();
 		}
 		
 
@@ -312,8 +318,10 @@
 				
 				<div>
 					<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-					<button type="button" class="btn btn-primary btn-sm" >Enviar Contrato</button>
-					<button type="button" class="btn btn-primary btn-sm" >Enviar Autorização</button>            
+					<!-- 
+					<button id="btn_contrato" type="button" class="btn btn-primary btn-sm" >Enviar Contrato</button>
+					<button type="button" class="btn btn-primary btn-sm" >Enviar Autorização</button>
+					 -->            
 				</div>
 			</form>
 
