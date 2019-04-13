@@ -79,6 +79,12 @@ public class LancamentoController {
 		return listar(model);
 	}
 	
+	@GetMapping("/pendentes")
+	public String pendentes(ModelMap model) {
+		model.addAttribute("lancamentosPendentes", lancamentoService.findLancamentosPendentes());
+		return "lancamento/pendentes"; 
+	}
+	
 	
 	
 	@ModelAttribute("viajantes")

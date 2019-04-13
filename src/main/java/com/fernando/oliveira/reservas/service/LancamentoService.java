@@ -1,5 +1,6 @@
 package com.fernando.oliveira.reservas.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,8 @@ public class LancamentoService {
 	
 	@Autowired
 	private ReservaService reservaService;
+	
+	private static final Integer MAX_SIZE = 5;
 	
 	@Transactional
 	public Lancamento insert(Lancamento lancamento) {
@@ -57,6 +60,22 @@ public class LancamentoService {
 	public List<Lancamento> findLancamentosPendentes(){
 		
 		return repository.findLancamentosPendentes();
+	}
+
+	public List<Lancamento> findProximosLancamentosPendentes() {
+
+		List<Lancamento> proximos = new ArrayList<Lancamento>(); 
+		List<Lancamento> list = repository.findLancamentosPendentes();
+		
+		for (int i = 0; i < MAX_SIZE ; i++) {
+			if(list.get(i) != null) {
+			Lancamento lancamento = list.get(i);
+			proximos.add(lancamento);
+			}
+			
+		}
+		return proximos;
+		
 	}
 
 }

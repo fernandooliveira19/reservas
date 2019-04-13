@@ -180,6 +180,25 @@ public class ReservaController {
 		return "autorizacao_"+data + "_" + viajante;
 		
 	}
+	
+	@RequestMapping(value = "/sendContract", method = RequestMethod.GET)
+	public String sendContract(RedirectAttributes attr) {
+		
+		Reserva reserva = reservaService.find(15);
+		contratoService.sendContract(reserva);
+		attr.addFlashAttribute("success", "Contrato enviado com sucesso.");
+		return "redirect:editar/"+reserva.getId();
+	}
+	
+	@GetMapping("/buscar/viajante/{nome}")
+	public String findReservasByNomeViajante(@PathVariable("nome") String nome, ModelMap model) {
+		
+		
+		List<Reserva> reservas = reservaService.findReservasByNomeViajante(nome);
+		model.addAttribute("reservas", reservas);
+		return "reserva/lista";
+		
+	}
 
 
 }

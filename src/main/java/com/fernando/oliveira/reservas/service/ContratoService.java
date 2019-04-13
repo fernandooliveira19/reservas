@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fernando.oliveira.reservas.domain.Lancamento;
@@ -35,6 +36,9 @@ public class ContratoService {
 
 	
 	private static final String LINHA = "\n";
+	
+	@Autowired
+	private SmtpEmailService smtpEmailService;
 
 	public ByteArrayInputStream gerarContrato(Reserva reserva) {
 
@@ -470,6 +474,10 @@ public class ContratoService {
 		return paragraph;
 	}
 
+	
+	public void sendContract(Reserva reserva) {
+		smtpEmailService.sendOrderConfirmationHtmlEmail(reserva);
+	}
 	
 
 }

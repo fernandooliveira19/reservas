@@ -29,6 +29,8 @@ public class ReservaService {
 
 	@Autowired
 	private LancamentoService lancamentoService;
+	
+	private static final Integer MAX_SIZE = 5;
 
 	/**
 	 * 
@@ -185,6 +187,25 @@ public class ReservaService {
 		List<Reserva> lista = repository.findProximasReservas();
 
 		return lista;
+	}
+
+	public List<Reserva> findReservasByNomeViajante(String nome) {
+		List<Reserva> lista = repository.findReservasByNomeViajante(nome);
+		return lista;
+	}
+
+	public List<Reserva> nextReserves() {
+		List<Reserva> next = new ArrayList<Reserva>(); 
+		List<Reserva> list = repository.findProximasReservas();
+		
+		for (int i = 0; i < MAX_SIZE ; i++) {
+			if(list.get(i) != null) {
+			Reserva reserva = list.get(i);
+			next.add(reserva);
+			}
+			
+		}
+		return next;
 	}
 
 }

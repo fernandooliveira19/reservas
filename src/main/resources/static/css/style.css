@@ -79,7 +79,7 @@ body {
 }
 
 .sidebar.sidebar-open {
-    width: 300px;
+    width: 200px;
 }
 
 /*
@@ -127,4 +127,21 @@ body {
 	color: #000000;
 	text-align: center;
 	
+}
+
+.table-home{
+	width: 50%;
+	border: 1px solid;
+	margin: 10px;
+}
+
+.table-home-box{
+	width: 100%;
+	border: 0px;
+	margin: 10px;
+}
+.table-home-box-item{
+	width: 50%;
+	border: 1px solid;
+	margin: 10px;
 }

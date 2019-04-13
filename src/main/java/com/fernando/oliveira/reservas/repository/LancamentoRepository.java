@@ -15,4 +15,6 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Integer>
 	@Query("SELECT obj FROM Lancamento obj INNER JOIN obj.reserva res WHERE res.situacaoReserva <> 'CANCELADO' AND obj.situacaoPagamento = 'PENDENTE' ORDER BY obj.dataLancamento")
 	List<Lancamento> findLancamentosPendentes();
 
+	
+
 }
