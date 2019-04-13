@@ -37,8 +37,8 @@ public class ContratoService {
 	
 	private static final String LINHA = "\n";
 	
-	@Autowired
-	private SmtpEmailService smtpEmailService;
+//	@Autowired
+//	private SmtpEmailService smtpEmailService;
 
 	public ByteArrayInputStream gerarContrato(Reserva reserva) {
 
@@ -476,7 +476,7 @@ public class ContratoService {
 
 	
 	public void sendContract(Reserva reserva) {
-		smtpEmailService.sendOrderConfirmationHtmlEmail(reserva);
+//		smtpEmailService.sendOrderConfirmationHtmlEmail(reserva);
 	}
 	
 
