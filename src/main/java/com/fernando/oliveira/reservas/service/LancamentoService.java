@@ -64,6 +64,7 @@ public class LancamentoService {
 
 	public List<Lancamento> findProximosLancamentosPendentes() {
 
+		try {
 		List<Lancamento> proximos = new ArrayList<Lancamento>(); 
 		List<Lancamento> list = repository.findLancamentosPendentes();
 		
@@ -75,7 +76,10 @@ public class LancamentoService {
 			
 		}
 		return proximos;
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }
