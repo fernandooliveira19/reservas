@@ -12,42 +12,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fernando.oliveira.reservas.domain.Lancamento;
-import com.fernando.oliveira.reservas.domain.Reserva;
 import com.fernando.oliveira.reservas.domain.dto.LancamentoDTO;
-import com.fernando.oliveira.reservas.domain.enums.SituacaoPagamento;
 import com.fernando.oliveira.reservas.repository.LancamentoRepository;
 
 @Service
 public class LancamentoService {
-	
+
 	@Autowired
 	private LancamentoRepository repository;
-	
-	@Autowired
-	private ReservaService reservaService;
-	
+
 	private static final Integer MAX_SIZE = 5;
-	
+
 	@Transactional
 	public Lancamento insert(Lancamento lancamento) {
-		
+
 		repository.save(lancamento);
-		
+
 		return lancamento;
 	}
-	
+
 	public Lancamento update(Lancamento obj) {
 		Lancamento lanc = find(obj.getId());
-		
+
 		return lanc;
 	}
-	
+
 	public Lancamento find(Integer id) {
 		Optional<Lancamento> obj = repository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! - id: "+ id +" ,  Tipo: " + Lancamento.class.getName(), null));
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! - id: " + id + " ,  Tipo: " + Lancamento.class.getName(), null));
 	}
-	
-	public List<Lancamento> findAll(){
+
+	public List<Lancamento> findAll() {
 		List<Lancamento> lista = repository.findAll();
 		return lista;
 	}
@@ -57,26 +53,28 @@ public class LancamentoService {
 		return null;
 	}
 
-	public List<Lancamento> findLancamentosPendentes(){
-		
+	public List<Lancamento> findLancamentosPendentes() {
+
 		return repository.findLancamentosPendentes();
 	}
 
 	public List<Lancamento> findProximosLancamentosPendentes() {
 
 		try {
-		List<Lancamento> proximos = new ArrayList<Lancamento>(); 
-		List<Lancamento> list = repository.findLancamentosPendentes();
-		
-		for (int i = 0; i < MAX_SIZE ; i++) {
-			if(list.get(i) != null) {
-			Lancamento lancamento = list.get(i);
-			proximos.add(lancamento);
+			List<Lancamento> list = repository.findLancamentosPendentes();
+
+			if (!list.isEmpty()) {
+
+				if (list.size() < MAX_SIZE) {
+					return list.subList(0, list.size());
+				} else {
+					return list.subList(0, MAX_SIZE);
+				}
+
 			}
-			
-		}
-		return proximos;
-		}catch(Exception e) {
+			return new ArrayList<Lancamento>();
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}

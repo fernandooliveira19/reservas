@@ -195,17 +195,24 @@ public class ReservaService {
 	}
 
 	public List<Reserva> nextReserves() {
-		List<Reserva> next = new ArrayList<Reserva>(); 
-		List<Reserva> list = repository.findProximasReservas();
-		
-		for (int i = 0; i < MAX_SIZE ; i++) {
-			if(list.get(i) != null) {
-			Reserva reserva = list.get(i);
-			next.add(reserva);
+		try {
+			List<Reserva> list = repository.findProximasReservas();
+
+			if (!list.isEmpty()) {
+
+				if (list.size() < MAX_SIZE) {
+					return list.subList(0, list.size());
+				} else {
+					return list.subList(0, MAX_SIZE);
+				}
+
 			}
-			
+			return new ArrayList<Reserva>();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		return next;
 	}
 
 }
