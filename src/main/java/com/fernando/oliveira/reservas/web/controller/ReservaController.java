@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fernando.oliveira.reservas.domain.Reserva;
@@ -190,12 +191,23 @@ public class ReservaController {
 		return "redirect:editar/"+reserva.getId();
 	}
 	
-	@GetMapping("/buscar/viajante/{nome}")
-	public String findReservasByNomeViajante(@PathVariable("nome") String nome, ModelMap model) {
+
+	@GetMapping(value = "/buscar/viajante/nome")
+	public String findReservasByNomeViajante(@RequestParam("nome") String nome, ModelMap model) {
 		
 		
 		List<Reserva> reservas = reservaService.findReservasByNomeViajante(nome);
 		model.addAttribute("reservas", reservas);
+		return "reserva/lista";
+		
+	}
+	
+	@GetMapping("/buscar/data/{entrada}{saida}")
+	public String findReservasByData(@PathVariable("entrada") String entrada, @PathVariable("saida") String saida, ModelMap model) {
+		
+		
+//		List<Reserva> reservas = reservaService.findReservasByNomeViajante(nome);
+//		model.addAttribute("reservas", reservas);
 		return "reserva/lista";
 		
 	}

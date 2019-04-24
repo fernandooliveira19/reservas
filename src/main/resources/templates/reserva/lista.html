@@ -26,28 +26,28 @@
 	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseViajante"
 	                        aria-controls="collapseNome">Viajantes
 	                </button>
-	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseLancamento"
-	                        aria-controls="collapseCargo">Lançamentos
-	                </button>
+	                <!-- 
 	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseReserva"
 	                        aria-controls="collapseData">Reservas
 	                </button>
+	                 -->
 	            </p>
 	            <div class="row">
 	                <div class="col">
 	                    <div class="collapse" id="collapseViajante">
 	
 	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/reservas/buscar/viajante">
+	                            <form class="form-inline" method="GET" th:action="@{/reservas/buscar/viajante/nome}">
 	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
-	                                       name="nome" />
-	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                                       th:name="nome" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>
 	                            </form>
 	                        </nav>
 	
 	                    </div>
 	                </div>
 	            </div>
+	           <!-- 
 	            <div class="row">
 	                <div class="col">
 	                    <div class="collapse" id="collapseLancamento">
@@ -75,12 +75,14 @@
 	                    </div>
 	                </div>
 	            </div>
+	             -->
+	            
 	            <div class="row">
 	                <div class="col">
 	                    <div class="collapse" id="collapseReserva">
 	
 	                        <nav class="navbar navbar-light bg-light">
-	                            <form class="form-inline" method="GET" action="/funcionarios/buscar/data">
+	                            <form class="form-inline" method="GET" action="/reservas/buscar/data">
 	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
 	                                       name="entrada" />
 	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
