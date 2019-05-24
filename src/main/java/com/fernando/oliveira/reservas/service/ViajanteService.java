@@ -64,4 +64,16 @@ public class ViajanteService {
 		return false;
 	}
 
+	public List<Viajante> search(Viajante viajante) {
+		
+//		List<Viajante> list = repository.search(viajante);
+		return null;
+	}
+
+	public List<Viajante> findByNomeLike(String nome) {
+		
+		List<Viajante> lista = repository.findByNomeContainingOrderByNome(nome);
+		return lista;
+	}
+
 }

@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fernando.oliveira.reservas.domain.Telefone;
 import com.fernando.oliveira.reservas.domain.Viajante;
+import com.fernando.oliveira.reservas.domain.dto.ViajanteDTO;
 import com.fernando.oliveira.reservas.service.TelefoneService;
 import com.fernando.oliveira.reservas.service.ViajanteService;
 
@@ -37,6 +39,11 @@ public class ViajanteController {
 		List<Viajante> viajantes = viajanteService.findAll();
 		model.addAttribute("viajantes", viajantes);
 		return "viajante/lista";
+	}
+	
+	@GetMapping("/filter")
+	public String filter(Viajante viajante) {
+		return "viajante/filter";
 	}
 	
 	@PostMapping("/salvar")
@@ -78,5 +85,15 @@ public class ViajanteController {
 		}
 		
 		return listar(model);
+	}
+	
+	@GetMapping("/find")
+	public String filter(@RequestParam("nome") String nome, ModelMap model) {
+		
+		List<Viajante> list = viajanteService.findByNomeLike(nome);
+		
+		model.addAttribute("viajantes", list);
+		
+		return "viajante/filter"; 
 	}
 }
