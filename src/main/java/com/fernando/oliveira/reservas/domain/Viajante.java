@@ -56,6 +56,7 @@ public class Viajante implements Serializable {
 	
 	
 	@OneToMany(mappedBy="viajante")
+	@JsonIgnore
 	private List<Reserva> reservas;
 	
 	public Viajante() {

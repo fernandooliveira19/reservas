@@ -30,6 +30,7 @@
 							<th>#</th>
 							<th>Nome</th>
 							<th>E-mail</th>
+							<th>Telefone</th>
 							<th>Ação</th>
 						</tr>
 					</thead>
@@ -38,6 +39,8 @@
 							<td th:text="${v.id}">3</td>
 							<td th:text="${v.nome}"></td>
 							<td th:text="${v.email}"></td>
+							<td th:text="${v.telefone.telefoneFormatado}"></td>
+							
 							<td colspan="2"><a class="btn btn-info btn-sm"
 								th:href="@{/viajantes/editar/{id} (id=${v.id}) }"
 								role="button"> <span class="oi oi-brush" title="Editar"

@@ -43,7 +43,7 @@ public class ViajanteResource {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/findAll",method=RequestMethod.GET)
 	public ResponseEntity<List<ViajanteDTO>> findAll() {
 		
 		List<Viajante> list = service.findAll();
@@ -58,6 +58,13 @@ public class ViajanteResource {
 		Viajante obj = service.find(id);
 		return ResponseEntity.ok(obj);
 		
+	}
+	
+	@RequestMapping(value="/findByName/{nome}", method=RequestMethod.GET)
+	public List<Viajante> findByNomeLike(@PathVariable String nome) {
+		
+		List<Viajante> lista = service.findByNomeLike(nome);
+		return lista;
 	}
 	
 

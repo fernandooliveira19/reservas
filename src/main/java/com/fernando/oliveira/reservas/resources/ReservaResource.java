@@ -43,7 +43,7 @@ public class ReservaResource {
 		
 	}
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(value="/findAll", method=RequestMethod.GET)
 	public ResponseEntity<List<ReservaDTO>> findAll() {
 		
 		List<Reserva> list = service.findAll();

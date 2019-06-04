@@ -1,6 +1,7 @@
 package com.fernando.oliveira.reservas.domain;
 
 import java.io.Serializable;
+import java.text.ParseException;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,15 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.swing.text.MaskFormatter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fernando.oliveira.reservas.domain.enums.TipoTelefone;
+import com.fernando.oliveira.reservas.domain.utils.ReservaUtils;
 
 @Entity
 public class Telefone implements Serializable {
@@ -91,6 +90,11 @@ public class Telefone implements Serializable {
 	}
 	public void setViajante(Viajante viajante) {
 		this.viajante = viajante;
+	}
+	
+	public String getTelefoneFormatado() {
+		return ReservaUtils.formatarTelefone(this);
+		
 	}
 	
 	

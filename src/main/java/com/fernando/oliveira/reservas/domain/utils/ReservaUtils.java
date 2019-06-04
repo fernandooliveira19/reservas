@@ -8,15 +8,14 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.swing.text.DateFormatter;
+import javax.swing.text.MaskFormatter;
 
-import org.apache.commons.lang3.time.DateUtils;
+import com.fernando.oliveira.reservas.domain.Telefone;
 
 public class ReservaUtils {
 
@@ -87,5 +86,19 @@ public class ReservaUtils {
 	
 	public static Date converterLocalDateTime(LocalDateTime localDateTime) {
 		return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+	}
+	
+	
+	public static String formatarTelefone(Telefone telefone) {
+	try {
+		MaskFormatter mf = new MaskFormatter("(##) #####-####");
+		mf.setValueContainsLiteralCharacters(false);
+		return mf.valueToString(telefone.getDdd()+telefone.getNumero());
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return "";
 	}
 }
