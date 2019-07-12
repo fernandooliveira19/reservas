@@ -34,11 +34,10 @@ import com.itextpdf.text.pdf.PdfWriter;
 @Service
 public class ContratoService {
 
-	
 	private static final String LINHA = "\n";
-	
-//	@Autowired
-//	private SmtpEmailService smtpEmailService;
+
+	// @Autowired
+	// private SmtpEmailService smtpEmailService;
 
 	public ByteArrayInputStream gerarContrato(Reserva reserva) {
 
@@ -47,7 +46,6 @@ public class ContratoService {
 
 		try {
 
-			
 			PdfWriter.getInstance(document, out);
 			document.open();
 			document.add(getTitulo("CONTRATO DE LOCAÇÃO POR TEMPORADA"));
@@ -108,7 +106,7 @@ public class ContratoService {
 		Paragraph responsavel = new Paragraph("Responsável locação:",
 				new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(0, 0, 0)));
 		paragraph.add(responsavel);
-		
+
 		paragraph.add(LINHA);
 		paragraph.add("Nome: " + reserva.getViajante().getNome());
 		paragraph.add(LINHA);
@@ -130,8 +128,8 @@ public class ContratoService {
 				+ "apartamento possui 1 cama de casal, 2 bicamas, 2 colchões de solteiro extras, "
 				+ "mesa com 6 cadeiras, banheiro social com box.");
 		paragraph.add(LINHA);
-		paragraph.add("Ainda possui TV 32' na sala e de 20' no quarto, modem Wi-fi, secadora de "
-				+ "roupas, 3 ventiladores, armário para acomodação de bagagens, cômoda, "
+		paragraph.add("Ainda possui TV 32' na sala e duas 32' nos quartos, modem Wi-fi, secadora de "
+				+ "roupas, 3 ventiladores, armário para acomodação de bagagens, cômoda, panela de arroz, "
 				+ "micro-ondas, fogão de quatro bocas, geladeira, liquidificador, sanduicheira grill "
 				+ "e utensílios de cozinha.");
 		paragraph.add(LINHA);
@@ -143,7 +141,7 @@ public class ContratoService {
 		Paragraph observacao = new Paragraph("Observações:",
 				new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(0, 0, 0)));
 		paragraph.add(observacao);
-		
+
 		Font zapfdingbats = new Font();
 		Chunk bullet = new Chunk("\u2022", zapfdingbats);
 		paragraph.add(LINHA);
@@ -160,17 +158,19 @@ public class ContratoService {
 
 	private Element getRegulamentoInterno() {
 		Paragraph paragraph = new Paragraph();
-		
+
 		Font zapfdingbats = new Font();
-	    Chunk bullet = new Chunk("\u2022", zapfdingbats);
-	    
+		Chunk bullet = new Chunk("\u2022", zapfdingbats);
+
 		paragraph.add(LINHA);
-		paragraph.add(bullet + "  O imóvel pode acomodar no máximo 8 pessoas. Sendo que crianças até " + "5 anos não contam.");
+		paragraph.add(bullet + "  O imóvel pode acomodar no máximo 8 pessoas. Sendo que crianças até "
+				+ "5 anos não contam.");
 		paragraph.add(LINHA);
 		paragraph.add(bullet + "  Banhistas devem entrar e sair pela porta lateral e usar o elevador "
 				+ "reservado para banhistas, sem areia no corpo");
 		paragraph.add(LINHA);
-		paragraph.add(bullet + "  Estacionamento é reservado para embarque e desembarque de " + "bagagem e é limitado a 15 minutos");
+		paragraph.add(bullet + "  Estacionamento é reservado para embarque e desembarque de "
+				+ "bagagem e é limitado a 15 minutos");
 		paragraph.add(LINHA);
 		paragraph.add(bullet + "  Animais devem ser levados no colo e/ou com coleira. Não será tolerada "
 				+ "sujeira produzida por animais em áreas comuns");
@@ -181,8 +181,6 @@ public class ContratoService {
 		paragraph.add(bullet + "  É vetado pendurar roupas ou quaisquer outros objetos nas janelas");
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
-		
-		
 
 		return paragraph;
 	}
@@ -194,15 +192,14 @@ public class ContratoService {
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 		paragraph.add("início:     ");
-		
+
 		String[] inicio = reserva.getDataEntradaFormatada().split(" ");
 		Phrase dataInicio = new Phrase(inicio[0]);
 		paragraph.add(dataInicio);
 		String horaInicio = inicio[1];
-		
 
 		paragraph.add("   após    " + new Phrase(horaInicio));
-		
+
 		paragraph.add(LINHA);
 
 		paragraph.add("término: ");
@@ -211,54 +208,50 @@ public class ContratoService {
 		paragraph.add(dataTermino);
 		Phrase horaTermino = new Phrase(termino[1]);
 		paragraph.add("   até as   " + horaTermino);
-		
-		
+
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
-		paragraph.add(
-				"A permanência do locatário no imóvel pode ensejar multas e indenização, nos termos da lei.");
+		paragraph.add("A permanência do locatário no imóvel pode ensejar multas e indenização, nos termos da lei.");
 
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 
 		return paragraph;
 	}
-	
+
 	private Element getPrecoPagamento(Reserva reserva) {
 		Paragraph paragraph = new Paragraph();
 		paragraph.add(LINHA);
-		
-		
+
 		boolean pagamentoSite = isPagamentoSite(reserva);
-		
-		if(pagamentoSite) {
-		
-		String textoPagamentoSite = atribuirTextoPagamentoSite(reserva);
-			paragraph.add(textoPagamentoSite);	
+
+		if (pagamentoSite) {
+
+			String textoPagamentoSite = atribuirTextoPagamentoSite(reserva);
+			paragraph.add(textoPagamentoSite);
 			paragraph.add(LINHA);
 			paragraph.add(LINHA);
 			paragraph.add(LINHA);
 			paragraph.add(LINHA);
-			
-		}else {
-		
-		String textoSinal = atribuirTextoPagamentoSinal(reserva);
-		paragraph.add(textoSinal);
-		paragraph.add(LINHA);
-		paragraph.add(LINHA);
-		
-		String textoPagamentoRestante = atribuirTextoRestantePagamento(reserva);
-		paragraph.add(textoPagamentoRestante);
-		
-		paragraph.add(LINHA);
-		paragraph.add(LINHA);
-		paragraph.add("Com isso totalizando, o locatário pagará pela importância de: ");
-		paragraph.add(ReservaUtils.formatarValorMonetario(reserva.getValorTotal()));
-		paragraph.add(", o qual já está incluso a taxa de limpeza.");
-		paragraph.add(LINHA);
+
+		} else {
+
+			String textoSinal = atribuirTextoPagamentoSinal(reserva);
+			paragraph.add(textoSinal);
+			paragraph.add(LINHA);
+			paragraph.add(LINHA);
+
+			String textoPagamentoRestante = atribuirTextoRestantePagamento(reserva);
+			paragraph.add(textoPagamentoRestante);
+
+			paragraph.add(LINHA);
+			paragraph.add(LINHA);
+			paragraph.add("Com isso totalizando, o locatário pagará pela importância de: ");
+			paragraph.add(ReservaUtils.formatarValorMonetario(reserva.getValorTotal()));
+			paragraph.add(", o qual já está incluso a taxa de limpeza.");
+			paragraph.add(LINHA);
 		}
-		
-		
+
 		return paragraph;
 	}
 
@@ -266,26 +259,23 @@ public class ContratoService {
 		StringBuilder texto = new StringBuilder();
 		texto.append("O locatário efetuou o pagamento no valor de:  ");
 		texto.append(ReservaUtils.formatarValorMonetario(reserva.getValorTotal()));
-		texto.append("  através do site www.aluguetemporada.com.br. Esse valor já está incluso a taxa de limpeza e a " + 
-				"taxa de serviço do site.");
+		texto.append("  através do site www.aluguetemporada.com.br. Esse valor já está incluso a taxa de limpeza e a "
+				+ "taxa de serviço do site.");
 		return texto.toString();
 	}
 
 	private boolean isPagamentoSite(Reserva reserva) {
-		
-		if(reserva.getLancamentos() != null
-				&& reserva.getLancamentos().size() > 0) {
-				
+
+		if (reserva.getLancamentos() != null && reserva.getLancamentos().size() > 0) {
+
 			for (Lancamento lancamento : reserva.getLancamentos()) {
-				
-				if(lancamento.getFormaPagamento().equals(FormaPagamento.SITE)){
+
+				if (lancamento.getFormaPagamento().equals(FormaPagamento.SITE)) {
 					return true;
 				}
-				
-				
+
 			}
-			
-		
+
 		}
 		return false;
 	}
@@ -295,35 +285,43 @@ public class ContratoService {
 		StringBuilder textoSinal = new StringBuilder();
 		if (reserva.getLancamentos() != null && !reserva.getLancamentos().isEmpty()) {
 
-			Lancamento sinal = reserva.getLancamentos().get(0);
+			if (reserva.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
+				
+				textoSinal.append("O locatário efetuou o pagamento no valor de: ");
+				textoSinal.append(ReservaUtils.formatarValorMonetario(reserva.getValorTotal()));
 
-			if (sinal.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
+			} else {
 
-				if (sinal.getValorLancamento().equals(reserva.getValorTotal())) {
-					textoSinal.append("O locatário efetuou o pagamento no valor de: ");
-					textoSinal.append(ReservaUtils.formatarValorMonetario(sinal.getValorLancamento()));
-				} else {
-					textoSinal.append("O locatário efetuou o pagamento no valor de: ");
+				Lancamento sinal = reserva.getLancamentos().get(0);
+
+				if (sinal.getSituacaoPagamento().equals(SituacaoPagamento.PAGO)) {
+
+					if (sinal.getValorLancamento().equals(reserva.getValorTotal())) {
+						textoSinal.append("O locatário efetuou o pagamento no valor de: ");
+						textoSinal.append(ReservaUtils.formatarValorMonetario(sinal.getValorLancamento()));
+					} else {
+						textoSinal.append("O locatário efetuou o pagamento no valor de: ");
+						textoSinal.append(ReservaUtils.formatarValorMonetario(sinal.getValorLancamento()));
+						textoSinal.append(" a titulo de sinal");
+					}
+				}
+
+				if (sinal.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
+
+					textoSinal.append("O locatário efetuará o pagamento no valor de: ");
 					textoSinal.append(ReservaUtils.formatarValorMonetario(sinal.getValorLancamento()));
 					textoSinal.append(" a titulo de sinal");
+
 				}
-			}
-
-			if (sinal.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
-
-				textoSinal.append("O locatário efetuará o pagamento no valor de: ");
-				textoSinal.append(ReservaUtils.formatarValorMonetario(sinal.getValorLancamento()));
-				textoSinal.append(" a titulo de sinal");
-
 			}
 
 		}
 		return textoSinal.toString();
 	}
-	
+
 	private String atribuirTextoRestantePagamento(Reserva reserva) {
 		StringBuilder texto = new StringBuilder();
-		
+
 		if (reserva.getLancamentos() != null && !reserva.getLancamentos().isEmpty()
 				&& reserva.getLancamentos().size() > 1) {
 
@@ -331,29 +329,25 @@ public class ContratoService {
 
 			if (lancamento.getSituacaoPagamento().equals(SituacaoPagamento.PENDENTE)) {
 
-				if (!ReservaUtils.isLancamentoAntesCheckIn(lancamento.getDataLancamento(),reserva.getDataEntrada())
+				if (!ReservaUtils.isLancamentoAntesCheckIn(lancamento.getDataLancamento(), reserva.getDataEntrada())
 						&& lancamento.getFormaPagamento().equals(FormaPagamento.LOCAL)) {
 					texto.append("O restante de ");
 					texto.append(ReservaUtils.formatarValorMonetario(lancamento.getValorLancamento()));
 					texto.append(" será pago na recepção ao ingressar no imóvel.");
-					
+
 				} else {
 					texto.append("o restante de ");
 					texto.append(ReservaUtils.formatarValorMonetario(lancamento.getValorLancamento()));
 					texto.append(" será pago até o dia ");
 					texto.append(ReservaUtils.formatarDataLocal(lancamento.getDataLancamento()));
-					
+
 				}
 			}
 
-			
 		}
 
-		
 		return texto.toString();
 	}
-
-	
 
 	private Element getCancelamentoLocacao() {
 		Paragraph paragraph = new Paragraph();
@@ -453,9 +447,9 @@ public class ContratoService {
 		Paragraph paragraph = new Paragraph();
 
 		try {
-			
+
 			Image img = Image.getInstance("assinatura_small.jpg");
-			
+
 			paragraph.add(img);
 			paragraph.add("____________________________________________");
 			paragraph.add(LINHA);
@@ -470,14 +464,12 @@ public class ContratoService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 		return paragraph;
 	}
 
-	
 	public void sendContract(Reserva reserva) {
-//		smtpEmailService.sendOrderConfirmationHtmlEmail(reserva);
+		// smtpEmailService.sendOrderConfirmationHtmlEmail(reserva);
 	}
-	
 
 }
