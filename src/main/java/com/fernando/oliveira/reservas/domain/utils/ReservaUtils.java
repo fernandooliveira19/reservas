@@ -49,10 +49,14 @@ public class ReservaUtils {
 	
 	public static String formatarDataLocal(LocalDate localDate) {
 		
+		if(localDate != null) {
 		Date date = parseStringToDate(localDate.toString(), "yyyy-MM-dd");
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
 		return df.format(date);
+		}
+		
+		return "";
 		
 	}
 	
