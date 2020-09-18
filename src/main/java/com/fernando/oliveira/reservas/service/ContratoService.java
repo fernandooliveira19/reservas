@@ -135,8 +135,11 @@ public class ContratoService {
 		paragraph.add(LINHA);
 		paragraph.add("O edifício possui portaria 24 horas, monitoramento por câmeras, WI-FI no hall "
 				+ "de entrada, 3 elevadores, serviço de praia com cadeiras e 2 guarda-sóis (a "
-				+ "solicitar na recepção).");
+				+ "solicitar na recepção) (*).");
 		paragraph.add(LINHA);
+		
+		paragraph.add(LINHA);
+		
 		paragraph.add(LINHA);
 		Paragraph observacao = new Paragraph("Observações:",
 				new Font(FontFamily.HELVETICA, 12, Font.BOLD, new BaseColor(0, 0, 0)));
@@ -150,6 +153,10 @@ public class ContratoService {
 		paragraph.add(bullet + "  É recomendável levar travesseiros");
 		paragraph.add(LINHA);
 		paragraph.add(bullet + "  NÃO possui garagem, mas há vagas nas ruas próximas e " + "estacionamentos");
+		paragraph.add(LINHA);
+		paragraph.add(bullet + " (*) No momento, devido as regras da prefeitura em relação ao COVID-19, não está "
+				+ "sendo permitido a montagem de guarda-sóis e cadeiras de praia na faixa de areia, "
+				+ "portanto o serviço de praia encontra-se indisponível." );
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 
