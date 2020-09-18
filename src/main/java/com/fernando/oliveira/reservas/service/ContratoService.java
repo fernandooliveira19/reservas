@@ -238,8 +238,7 @@ public class ContratoService {
 			paragraph.add(textoPagamentoSite);
 			paragraph.add(LINHA);
 			paragraph.add(LINHA);
-			paragraph.add(LINHA);
-			paragraph.add(LINHA);
+		
 
 		} else {
 
@@ -375,8 +374,7 @@ public class ContratoService {
 				+ "mediante acordo com o locatário e agenda disponível.");
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
-		paragraph.add(LINHA);
-		paragraph.add(LINHA);
+		
 		return paragraph;
 	}
 
