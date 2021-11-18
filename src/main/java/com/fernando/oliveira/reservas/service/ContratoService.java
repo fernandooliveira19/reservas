@@ -128,14 +128,14 @@ public class ContratoService {
 				+ "apartamento possui 1 cama de casal, 2 bicamas, 2 colchões de solteiro extras, "
 				+ "mesa com 6 cadeiras, banheiro social com box.");
 		paragraph.add(LINHA);
-		paragraph.add("Ainda possui TV 32' na sala e duas 32' nos quartos, modem Wi-fi, secadora de "
+		paragraph.add("Ainda possui TV 49' na sala e duas 32' nos quartos, modem Wi-fi, secadora de "
 				+ "roupas, 3 ventiladores, armário para acomodação de bagagens, cômoda, panela de arroz, "
-				+ "micro-ondas, fogão de quatro bocas, geladeira, liquidificador, sanduicheira grill "
-				+ "e utensílios de cozinha.");
+				+ "micro-ondas, fogão de quatro bocas, geladeira, liquidificador, sanduicheira grill, "
+				+ "filtro de água e utensílios de cozinha.");
 		paragraph.add(LINHA);
 		paragraph.add("O edifício possui portaria 24 horas, monitoramento por câmeras, WI-FI no hall "
 				+ "de entrada, 3 elevadores, serviço de praia com cadeiras e 2 guarda-sóis (a "
-				+ "solicitar na recepção) (*).");
+				+ "solicitar na recepção) ");
 		paragraph.add(LINHA);
 		
 		paragraph.add(LINHA);
@@ -154,9 +154,8 @@ public class ContratoService {
 		paragraph.add(LINHA);
 		paragraph.add(bullet + "  NÃO possui garagem, mas há vagas nas ruas próximas e " + "estacionamentos");
 		paragraph.add(LINHA);
-		paragraph.add(bullet + " (*) No momento, devido as regras da prefeitura em relação ao COVID-19, não está "
-				+ "sendo permitido a montagem de guarda-sóis e cadeiras de praia na faixa de areia, "
-				+ "portanto o serviço de praia encontra-se indisponível." );
+		paragraph.add(bullet + " Para uso de guarda-sol e cadeiras de praia na faixa de areia, é "
+				+ " preciso solicitá-los na recepção, informando o número do apartamento. " );
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
 
