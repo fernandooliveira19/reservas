@@ -154,7 +154,7 @@ public class ContratoService {
 		paragraph.add(LINHA);
 		paragraph.add(bullet + "  NÃO possui garagem, mas há vagas nas ruas próximas e " + "estacionamentos");
 		paragraph.add(LINHA);
-		paragraph.add(bullet + " Para uso de guarda-sol e cadeiras de praia na faixa de areia, é "
+		paragraph.add(bullet + "  Para uso de guarda-sol e cadeiras de praia na faixa de areia, é"
 				+ " preciso solicitá-los na recepção, informando o número do apartamento. " );
 		paragraph.add(LINHA);
 		paragraph.add(LINHA);
